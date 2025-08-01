@@ -1,125 +1,167 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Bell, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Button } from '../components/ui/button';
+import { Badge } from '../components/ui/badge';
+import { Bell, Package, Star, ShoppingCart, X } from 'lucide-react';
 
-const Notifications = () => {
-  const [notifications] = useState([
+interface Notification {
+  id: number;
+  type: 'order' | 'review' | 'system' | 'promotion';
+  title: string;
+  message: string;
+  timestamp: string;
+  read: boolean;
+}
+
+const Notifications: React.FC = () => {
+  const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: 1,
-      title: 'Order Confirmed',
-      message: 'Your order #12345 has been confirmed and is being processed.',
-      type: 'success',
-      timestamp: '2 hours ago',
+      type: 'order',
+      title: 'Order Shipped',
+      message: 'Your order #123 has been shipped and is on its way!',
+      timestamp: '2025-08-01T10:30:00',
       read: false
     },
     {
       id: 2,
-      title: 'Product Back in Stock',
-      message: 'Wireless Bluetooth Headphones is back in stock!',
-      type: 'info',
-      timestamp: '1 day ago',
-      read: true
+      type: 'review',
+      title: 'New Review',
+      message: 'Someone left a 5-star review on your product!',
+      timestamp: '2025-08-01T09:15:00',
+      read: false
     },
     {
       id: 3,
-      title: 'Review Request',
-      message: 'How was your recent purchase? Leave a review!',
-      type: 'warning',
-      timestamp: '3 days ago',
-      read: false
+      type: 'system',
+      title: 'Welcome!',
+      message: 'Welcome to our platform. Start exploring our products!',
+      timestamp: '2025-07-31T16:00:00',
+      read: true
     }
   ]);
 
-  const getIcon = (type: string) => {
+  const markAsRead = (id: number) => {
+    setNotifications(prev => 
+      prev.map(notification => 
+        notification.id === id ? { ...notification, read: true } : notification
+      )
+    );
+  };
+
+  const deleteNotification = (id: number) => {
+    setNotifications(prev => prev.filter(notification => notification.id !== id));
+  };
+
+  const markAllAsRead = () => {
+    setNotifications(prev => 
+      prev.map(notification => ({ ...notification, read: true }))
+    );
+  };
+
+  const getNotificationIcon = (type: string) => {
     switch (type) {
-      case 'success':
-        return <CheckCircle className="text-green-500" size={20} />;
-      case 'error':
-        return <XCircle className="text-red-500" size={20} />;
-      case 'warning':
-        return <Clock className="text-yellow-500" size={20} />;
+      case 'order':
+        return <Package className="w-5 h-5" />;
+      case 'review':
+        return <Star className="w-5 h-5" />;
+      case 'promotion':
+        return <ShoppingCart className="w-5 h-5" />;
       default:
-        return <Bell className="text-blue-500" size={20} />;
+        return <Bell className="w-5 h-5" />;
     }
   };
 
-  const getBadgeColor = (type: string) => {
+  const getNotificationColor = (type: string) => {
     switch (type) {
-      case 'success':
-        return 'bg-green-100 text-green-800';
-      case 'error':
-        return 'bg-red-100 text-red-800';
-      case 'warning':
-        return 'bg-yellow-100 text-yellow-800';
+      case 'order':
+        return 'text-blue-600 bg-blue-100';
+      case 'review':
+        return 'text-yellow-600 bg-yellow-100';
+      case 'promotion':
+        return 'text-green-600 bg-green-100';
       default:
-        return 'bg-blue-100 text-blue-800';
+        return 'text-gray-600 bg-gray-100';
     }
   };
+
+  const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <div className="flex flex-col h-full w-full">
-      <header className="flex items-center gap-4 border-b border-blue-200 bg-white/80 backdrop-blur-sm px-6 py-4">
-        <SidebarTrigger />
-        <div className="flex-1">
-          <h1 className="text-2xl font-bold">Notifications</h1>
-          <p className="text-gray-600">Stay updated with your latest activities</p>
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">Notifications</h1>
+            <p className="text-gray-600">Stay updated with your latest activities</p>
+          </div>
+          {unreadCount > 0 && (
+            <Button onClick={markAllAsRead} variant="outline">
+              Mark all as read
+            </Button>
+          )}
         </div>
-        <Button variant="outline">
-          Mark all as read
-        </Button>
-      </header>
-      
-      <main className="flex-1 overflow-auto p-6">
-        <div className="max-w-4xl mx-auto space-y-4">
-          {notifications.map((notification, index) => (
-            <motion.div
-              key={notification.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <Card className={`transition-all duration-200 ${!notification.read ? 'ring-2 ring-blue-200 bg-blue-50/50' : ''}`}>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 mt-1">
-                      {getIcon(notification.type)}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-lg">{notification.title}</h3>
-                        <Badge className={getBadgeColor(notification.type)}>
-                          {notification.type}
-                        </Badge>
-                        {!notification.read && (
-                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                        )}
-                      </div>
-                      <p className="text-gray-600 mb-3">{notification.message}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-500">{notification.timestamp}</span>
-                        <div className="flex gap-2">
-                          {!notification.read && (
-                            <Button size="sm" variant="outline">
-                              Mark as read
-                            </Button>
-                          )}
-                          <Button size="sm" variant="ghost">
-                            Dismiss
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
+      </div>
+
+      {notifications.length === 0 ? (
+        <Card>
+          <CardContent className="text-center py-12">
+            <Bell className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold mb-2">No notifications</h3>
+            <p className="text-gray-600">You're all caught up!</p>
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="space-y-4">
+          {notifications.map((notification) => (
+            <Card key={notification.id} className={!notification.read ? 'border-blue-200 bg-blue-50' : ''}>
+              <CardContent className="p-4">
+                <div className="flex items-start gap-4">
+                  <div className={`p-2 rounded-full ${getNotificationColor(notification.type)}`}>
+                    {getNotificationIcon(notification.type)}
                   </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+                  
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h3 className="font-semibold mb-1">{notification.title}</h3>
+                        <p className="text-gray-600 mb-2">{notification.message}</p>
+                        <p className="text-sm text-gray-500">
+                          {new Date(notification.timestamp).toLocaleString()}
+                        </p>
+                      </div>
+                      
+                      <div className="flex items-center gap-2">
+                        {!notification.read && (
+                          <Badge variant="secondary">New</Badge>
+                        )}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => deleteNotification(notification.id)}
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    {!notification.read && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="mt-2"
+                        onClick={() => markAsRead(notification.id)}
+                      >
+                        Mark as read
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
-      </main>
+      )}
     </div>
   );
 };
