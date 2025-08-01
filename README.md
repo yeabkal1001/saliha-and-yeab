@@ -2,6 +2,8 @@
 
 A modern full-stack web application built with Ruby on Rails API backend and React frontend, containerized with Docker and MySQL database.
 
+<!-- Updated by salihaabdo - Testing Git configuration -->
+
 ## 🏗️ Architecture
 
 - **Backend**: Ruby on Rails 7.0 API with JWT authentication
