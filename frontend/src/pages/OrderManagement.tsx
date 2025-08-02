@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { useOrders } from '../contexts/OrderContext';
+import { useOrders, Order } from '../contexts/OrderContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../hooks/use-toast';
 import { 
@@ -93,7 +93,7 @@ const OrderManagement = () => {
       return;
     }
 
-    const updateData = {
+    const updateData: any = {
       orderId: parseInt(orderId),
       status: updateForm.status as 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled',
     };
@@ -116,7 +116,7 @@ const OrderManagement = () => {
   };
 
   const openUpdateDialog = (order: Order) => {
-    setSelectedOrder(order.id);
+    setSelectedOrder(order.id.toString());
     setUpdateForm({
       status: order.status,
       notes: order.notes || '',

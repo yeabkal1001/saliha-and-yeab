@@ -294,19 +294,19 @@ const SellerDashboard = () => {
                         {index + 1}
                       </div>
                       <img
-                        src={product.image}
+                                                 src={product.image_url}
                         alt={product.title}
                         className="w-12 h-12 object-cover rounded"
                       />
                       <div className="flex-1">
                         <p className="font-medium line-clamp-1">{product.title}</p>
-                        <p className="text-sm text-gray-600">{product.reviews} sales</p>
+                                                 <p className="text-sm text-gray-600">{product.reviews.length} sales</p>
                       </div>
                       <div className="text-right">
                         <p className="font-bold">${product.price}</p>
                         <div className="flex items-center gap-1">
                           <Star size={12} className="fill-yellow-400 text-yellow-400" />
-                          <span className="text-sm">{product.rating}</span>
+                                                     <span className="text-sm">{product.reviews.length > 0 ? (product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length).toFixed(1) : 'No'}</span>
                         </div>
                       </div>
                     </div>
