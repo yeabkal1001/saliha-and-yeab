@@ -16,7 +16,6 @@ interface AuthContextType {
   register: (name: string, email: string, password: string, store_name?: string, isAdmin?: boolean) => Promise<boolean>;
   logout: () => void;
   updateProfile: (data: Partial<User>) => Promise<boolean>;
-  onAuthChange?: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -87,10 +86,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         store_name: userData.store_name
       });
       
-      // Trigger auth change callback
-      if (value.onAuthChange) {
-        value.onAuthChange();
-      }
+
       
       return true;
     } catch (error: unknown) {
@@ -181,10 +177,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     register,
     logout,
-    updateProfile,
-    onAuthChange: () => {
-      // This will be set by the NotificationContext
-    }
+    updateProfile
   };
 
   return (
