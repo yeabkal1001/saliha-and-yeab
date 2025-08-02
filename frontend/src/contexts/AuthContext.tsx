@@ -16,6 +16,7 @@ interface AuthContextType {
   register: (name: string, email: string, password: string, store_name?: string, isAdmin?: boolean) => Promise<boolean>;
   logout: () => void;
   updateProfile: (data: Partial<User>) => Promise<boolean>;
+  onAuthChange?: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -67,7 +68,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       setLoading(true);
-      const response = await api.post('/api/v1/auth/signin', { email, password });
+      const response = await api.post('/api/v1/auth/signin', { user: { email, password } });
       
       const { token, user: userData } = response.data;
       
@@ -85,6 +86,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         role: userData.role || 'user',
         store_name: userData.store_name
       });
+      
+      // Trigger auth change callback
+      if (value.onAuthChange) {
+        value.onAuthChange();
+      }
       
       return true;
     } catch (error: unknown) {
@@ -175,7 +181,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     register,
     logout,
-    updateProfile
+    updateProfile,
+    onAuthChange: () => {
+      // This will be set by the NotificationContext
+    }
   };
 
   return (

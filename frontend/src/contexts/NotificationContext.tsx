@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../lib/api';
+import { useAuth } from './AuthContext';
 
 export interface Notification {
   id: string;
@@ -27,6 +28,7 @@ const NotificationContext = createContext<NotificationContextType | null>(null);
 export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(false);
+  const { onAuthChange } = useAuth();
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
@@ -43,10 +45,27 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     }
   };
 
-  // Fetch notifications on mount
+  // Fetch notifications on mount only if user is authenticated
   useEffect(() => {
-    fetchNotifications();
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      fetchNotifications();
+    }
   }, []);
+
+  // Set up auth change callback to refresh notifications
+  useEffect(() => {
+    if (onAuthChange) {
+      onAuthChange = () => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+          fetchNotifications();
+        } else {
+          setNotifications([]);
+        }
+      };
+    }
+  }, [onAuthChange]);
 
   const addNotification = (notificationData: Omit<Notification, 'id' | 'timestamp' | 'read'>) => {
     const newNotification: Notification = {
