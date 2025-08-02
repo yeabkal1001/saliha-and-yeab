@@ -12,7 +12,8 @@ class Api::V1::AuthController < ApplicationController
           id: user.id,
           name: user.name,
           email: user.email,
-          store_name: user.store_name
+          store_name: user.store_name,
+          role: user.admin? ? 'admin' : 'user'
         },
         token: token
       }, status: :created
@@ -31,7 +32,8 @@ class Api::V1::AuthController < ApplicationController
           id: user.id,
           name: user.name,
           email: user.email,
-          store_name: user.store_name
+          store_name: user.store_name,
+          role: user.admin? ? 'admin' : 'user'
         },
         token: token
       }
@@ -54,7 +56,8 @@ class Api::V1::AuthController < ApplicationController
         id: @current_user.id,
         name: @current_user.name,
         email: @current_user.email,
-        store_name: @current_user.store_name
+        store_name: @current_user.store_name,
+        role: @current_user.admin? ? 'admin' : 'user'
       }
     }
   end
@@ -63,7 +66,7 @@ class Api::V1::AuthController < ApplicationController
 
   def user_params
     # Handle both camelCase (storeName) and snake_case (store_name) parameters
-    user_params_raw = params.require(:user).permit(:name, :email, :password, :password_confirmation, :store_name, :storeName)
+    user_params_raw = params.require(:user).permit(:name, :email, :password, :password_confirmation, :store_name, :storeName, :admin)
     
     # Convert storeName to store_name if present
     if user_params_raw[:storeName].present?

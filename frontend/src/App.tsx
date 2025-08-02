@@ -36,6 +36,7 @@ import SellerDashboard from './pages/SellerDashboard';
 import Search from './pages/Search';
 import Notifications from './pages/Notifications';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminSignUp from './pages/AdminSignUp';
 import NotFound from './pages/NotFound';
 
 // Create a client
@@ -61,6 +62,9 @@ const AppContent = () => {
         } />
         <Route path="/signup" element={
           user ? <Navigate to="/" replace /> : <SignUp />
+        } />
+        <Route path="/admin-signup" element={
+          user ? <Navigate to="/" replace /> : <AdminSignUp />
         } />
         
         {/* Protected routes */}

@@ -339,7 +339,7 @@ const OrderManagement = () => {
                               <div className="border-t pt-4">
                                 <div className="flex justify-between items-center">
                                   <span className="font-medium">Total</span>
-                                  <span className="text-xl font-bold text-blue-600">${order.total_amount.toFixed(2)}</span>
+                                  <span className="text-xl font-bold text-blue-600">${typeof order.total_amount === 'string' ? parseFloat(order.total_amount).toFixed(2) : order.total_amount.toFixed(2)}</span>
                                 </div>
                               </div>
                             </div>
@@ -361,7 +361,7 @@ const OrderManagement = () => {
                         <MapPin className="h-4 w-4 text-gray-500" />
                         <span className="text-sm text-gray-600">{order.shipping_address}</span>
                       </div>
-                      <span className="text-xl font-bold text-blue-600">${order.total_amount.toFixed(2)}</span>
+                      <span className="text-xl font-bold text-blue-600">${typeof order.total_amount === 'string' ? parseFloat(order.total_amount).toFixed(2) : order.total_amount.toFixed(2)}</span>
                     </div>
                     
                     <div className="flex items-center gap-4 text-sm text-gray-600">

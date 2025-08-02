@@ -7,16 +7,16 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Eye, EyeOff, Mail, Lock, User, Store, ShoppingBag } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, Store, Shield, Key } from 'lucide-react';
 
-const SignUp = () => {
+const AdminSignUp = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
-    storeName: ''
+    storeName: '',
+    adminCode: ''
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -25,6 +25,9 @@ const SignUp = () => {
   
   const { register } = useAuth();
   const navigate = useNavigate();
+
+  // Secret admin code - in production, this should be stored securely
+  const ADMIN_SECRET_CODE = 'SHOPEASE_ADMIN_2025';
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -49,16 +52,23 @@ const SignUp = () => {
       return;
     }
 
+    if (formData.adminCode !== ADMIN_SECRET_CODE) {
+      setError('Invalid admin code. Please contact the system administrator.');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const success = await register(
         formData.name,
         formData.email,
         formData.password,
-        formData.storeName
+        formData.storeName,
+        true // isAdmin flag
       );
       
       if (success) {
-        navigate('/');
+        navigate('/admin');
       } else {
         setError('Registration failed. Please try again.');
       }
@@ -70,7 +80,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-indigo-100 p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -80,16 +90,16 @@ const SignUp = () => {
         <Card className="shadow-xl border-0">
           <CardHeader className="text-center space-y-4">
             <div className="flex justify-center">
-              <div className="bg-blue-600 p-3 rounded-full">
-                <ShoppingBag className="h-8 w-8 text-white" />
+              <div className="bg-purple-600 p-3 rounded-full">
+                <Shield className="h-8 w-8 text-white" />
               </div>
             </div>
             <div>
               <CardTitle className="text-2xl font-bold text-gray-900">
-                Create Account
+                Admin Registration
               </CardTitle>
               <CardDescription className="text-gray-600 mt-2">
-                Join ShopEase and start shopping
+                Create an admin account for ShopEase
               </CardDescription>
             </div>
           </CardHeader>
@@ -187,7 +197,7 @@ const SignUp = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="storeName">Store Name *</Label>
+                <Label htmlFor="storeName">Store Name</Label>
                 <div className="relative">
                   <Store className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
@@ -201,44 +211,52 @@ const SignUp = () => {
                     disabled={isLoading}
                   />
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="adminCode">Admin Code *</Label>
+                <div className="relative">
+                  <Key className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="adminCode"
+                    type="password"
+                    placeholder="Enter admin authorization code"
+                    value={formData.adminCode}
+                    onChange={(e) => handleChange('adminCode', e.target.value)}
+                    className="pl-10"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
                 <p className="text-xs text-gray-500">
-                  Everyone can sell products on ShopEase
+                  Contact the system administrator for the admin code
                 </p>
               </div>
               
               <Button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-purple-600 hover:bg-purple-700"
                 disabled={isLoading}
               >
                 {isLoading ? (
                   <div className="flex items-center space-x-2">
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    <span>Creating account...</span>
+                    <span>Creating admin account...</span>
                   </div>
                 ) : (
-                  'Create Account'
+                  'Create Admin Account'
                 )}
               </Button>
             </form>
             
-            <div className="mt-6 text-center space-y-2">
+            <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
                 Already have an account?{' '}
                 <Link
                   to="/signin"
-                  className="font-medium text-blue-600 hover:text-blue-500 transition-colors"
-                >
-                  Sign in here
-                </Link>
-              </p>
-              <p className="text-sm text-gray-600">
-                Need admin access?{' '}
-                <Link
-                  to="/admin-signup"
                   className="font-medium text-purple-600 hover:text-purple-500 transition-colors"
                 >
-                  Admin Registration
+                  Sign in here
                 </Link>
               </p>
             </div>
@@ -249,4 +267,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default AdminSignUp; 

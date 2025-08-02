@@ -13,7 +13,7 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
-  register: (name: string, email: string, password: string, store_name?: string) => Promise<boolean>;
+  register: (name: string, email: string, password: string, store_name?: string, isAdmin?: boolean) => Promise<boolean>;
   logout: () => void;
   updateProfile: (data: Partial<User>) => Promise<boolean>;
 }
@@ -96,7 +96,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const register = async (name: string, email: string, password: string, store_name?: string): Promise<boolean> => {
+  const register = async (name: string, email: string, password: string, store_name?: string, isAdmin?: boolean): Promise<boolean> => {
     try {
       setLoading(true);
       // Wrap data in 'user' object as expected by backend
@@ -105,7 +105,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           name, 
           email, 
           password, 
-          store_name 
+          store_name,
+          admin: isAdmin || false
         }
       };
       

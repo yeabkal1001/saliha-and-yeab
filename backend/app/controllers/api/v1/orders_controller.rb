@@ -90,6 +90,14 @@ class Api::V1::OrdersController < ApplicationController
         product.update!(stock_quantity: product.stock_quantity - quantity)
       end
 
+      # Notify sellers about the order
+      @order.order_items.each do |item|
+        seller = item.product.user
+        # In a real application, you would send an email or push notification here
+        # For now, we'll just log it
+        Rails.logger.info "Order notification: #{seller.name} (#{seller.email}) received an order for #{item.product.title}"
+      end
+
       render json: @order.as_json(
         include: { 
           order_items: { 
