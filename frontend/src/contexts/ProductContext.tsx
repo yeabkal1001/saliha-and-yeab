@@ -57,7 +57,6 @@ interface ProductContextType {
   placeOrder: (shippingAddress: string) => void;
   getSellerOrders: (sellerId: string) => Order[];
   refreshProducts: () => void;
-  getCartTotal: () => number;
 }
 
 const ProductContext = createContext<ProductContextType | null>(null);
@@ -112,10 +111,6 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const refreshProducts = () => {
     fetchProducts();
-  };
-
-  const getCartTotal = (): number => {
-    return cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
   };
 
   const addProduct = async (productData: Omit<Product, 'id' | 'created_at' | 'updated_at' | 'user_id'>) => {
@@ -176,7 +171,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
     } catch (err) {
       console.error('Failed to delete product:', err);
       addNotification({
-        type: 'message',
+        type: 'error',
         title: 'Error',
         message: 'Failed to delete product. Please try again.'
       });
@@ -196,7 +191,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return [...prevCart, { product, quantity }];
     });
     addNotification({
-      type: 'message',
+      type: 'success',
       title: 'Added to Cart',
       message: `${product.title} added to cart!`
     });
@@ -281,14 +276,14 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
       clearCart();
       addNotification({
-        type: 'order',
+        type: 'success',
         title: 'Order Placed!',
         message: 'Your order has been placed successfully!'
       });
     } catch (err) {
       console.error('Failed to place order:', err);
       addNotification({
-        type: 'message',
+        type: 'error',
         title: 'Order Failed',
         message: 'Failed to place order. Please try again.'
       });
@@ -318,8 +313,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       clearCart,
       placeOrder,
       getSellerOrders,
-      refreshProducts,
-      getCartTotal
+      refreshProducts
     }}>
       {children}
     </ProductContext.Provider>

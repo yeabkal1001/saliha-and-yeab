@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { useReviews } from '../contexts/ReviewContext';
+import { useReviews, Review } from '../contexts/ReviewContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../hooks/use-toast';
 import { Star, ThumbsUp, Verified, MessageSquare } from 'lucide-react';
@@ -17,43 +17,59 @@ interface ProductReviewsProps {
 }
 
 export const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => {
-  const { getProductReviews, addReview, canUserReview, getAverageRating, getTotalReviews, markHelpful } = useReviews();
+  const { getProductReviews, addReview, canUserReview } = useReviews();
   const { user } = useAuth();
   const { toast } = useToast();
   
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [averageRating, setAverageRating] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
+  const [canReview, setCanReview] = useState(false);
   const [isReviewDialogOpen, setIsReviewDialogOpen] = useState(false);
   const [reviewForm, setReviewForm] = useState({
     rating: 5,
-    title: '',
     comment: ''
   });
 
-  const reviews = getProductReviews(productId);
-  const averageRating = getAverageRating(productId);
-  const totalReviews = getTotalReviews(productId);
-  const canReview = user ? canUserReview(productId, user.id) : false;
+  useEffect(() => {
+    const loadReviews = async () => {
+      try {
+        const reviewsData = await getProductReviews(parseInt(productId));
+        setReviews(reviewsData);
+        
+        // Calculate average rating
+        if (reviewsData.length > 0) {
+          const total = reviewsData.reduce((sum, review) => sum + review.rating, 0);
+          setAverageRating(total / reviewsData.length);
+        }
+        setTotalReviews(reviewsData.length);
+        
+        if (user) {
+          const canReviewData = await canUserReview(parseInt(productId));
+          setCanReview(canReviewData);
+        }
+      } catch (error) {
+        console.error('Failed to load reviews:', error);
+      }
+    };
+    loadReviews();
+  }, [productId, user, getProductReviews, canUserReview]);
 
   const handleSubmitReview = () => {
     if (!user) return;
     
-    if (!reviewForm.title.trim() || !reviewForm.comment.trim()) {
+    if (!reviewForm.comment.trim()) {
       toast({
         title: "Review incomplete",
-        description: "Please provide both a title and comment for your review.",
+        description: "Please provide a comment for your review.",
         variant: "destructive"
       });
       return;
     }
 
-    addReview({
-      productId,
-      userId: user.id,
-      userName: user.name,
-      userAvatar: user.avatar,
+    addReview(parseInt(productId), {
       rating: reviewForm.rating,
-      title: reviewForm.title,
-      comment: reviewForm.comment,
-      verified: true // In real app, this would be based on purchase history
+      comment: reviewForm.comment
     });
 
     toast({
@@ -62,7 +78,7 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => 
     });
 
     setIsReviewDialogOpen(false);
-    setReviewForm({ rating: 5, title: '', comment: '' });
+    setReviewForm({ rating: 5, comment: '' });
   };
 
   const renderStars = (rating: number, size: 'sm' | 'md' | 'lg' = 'md') => {
@@ -185,16 +201,6 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => 
                     </div>
 
                     <div>
-                      <Label htmlFor="reviewTitle">Review Title</Label>
-                      <Input
-                        id="reviewTitle"
-                        value={reviewForm.title}
-                        onChange={(e) => setReviewForm(prev => ({ ...prev, title: e.target.value }))}
-                        placeholder="Summarize your experience"
-                      />
-                    </div>
-
-                    <div>
                       <Label htmlFor="reviewComment">Your Review</Label>
                       <Textarea
                         id="reviewComment"
@@ -235,52 +241,25 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => 
               <Card>
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    {review.userAvatar ? (
-                      <img
-                        src={review.userAvatar}
-                        alt={review.userName}
-                        className="w-12 h-12 rounded-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                        <span className="text-blue-600 font-medium">
-                          {review.userName.charAt(0)}
-                        </span>
-                      </div>
-                    )}
+                    <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                      <span className="text-blue-600 font-medium">
+                        {review.user.name.charAt(0)}
+                      </span>
+                    </div>
                     
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="font-medium">{review.userName}</span>
-                        {review.verified && (
-                          <Badge variant="secondary" className="text-xs">
-                            <Verified className="w-3 h-3 mr-1" />
-                            Verified Purchase
-                          </Badge>
-                        )}
+                        <span className="font-medium">{review.user.name}</span>
                       </div>
                       
                       <div className="flex items-center gap-2 mb-2">
                         {renderStars(review.rating, 'sm')}
                         <span className="text-sm text-gray-600">
-                          {review.createdAt.toLocaleDateString()}
+                          {new Date(review.created_at).toLocaleDateString()}
                         </span>
                       </div>
                       
-                      <h4 className="font-medium mb-2">{review.title}</h4>
                       <p className="text-gray-700 mb-3">{review.comment}</p>
-                      
-                      <div className="flex items-center gap-4">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => markHelpful(review.id)}
-                          className="text-gray-600 hover:text-blue-600"
-                        >
-                          <ThumbsUp className="w-4 h-4 mr-1" />
-                          Helpful ({review.helpful})
-                        </Button>
-                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -329,16 +308,6 @@ export const ProductReviews: React.FC<ProductReviewsProps> = ({ productId }) => 
                           {reviewForm.rating} star{reviewForm.rating !== 1 ? 's' : ''}
                         </span>
                       </div>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="reviewTitle">Review Title</Label>
-                      <Input
-                        id="reviewTitle"
-                        value={reviewForm.title}
-                        onChange={(e) => setReviewForm(prev => ({ ...prev, title: e.target.value }))}
-                        placeholder="Summarize your experience"
-                      />
                     </div>
 
                     <div>

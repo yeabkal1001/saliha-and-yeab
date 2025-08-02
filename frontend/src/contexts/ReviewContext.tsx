@@ -38,9 +38,6 @@ interface ReviewContextType {
   getProductRating: (productId: number) => Promise<ProductRating>;
   canUserReview: (productId: number) => Promise<boolean>;
   refreshReviews: () => void;
-  getAverageRating: (reviews: Review[]) => number;
-  getTotalReviews: (reviews: Review[]) => number;
-  markHelpful: (reviewId: number) => void;
 }
 
 const ReviewContext = createContext<ReviewContextType | null>(null);
@@ -189,21 +186,6 @@ export const ReviewProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   };
 
-  const getAverageRating = (reviews: Review[]): number => {
-    if (reviews.length === 0) return 0;
-    const total = reviews.reduce((sum, review) => sum + review.rating, 0);
-    return total / reviews.length;
-  };
-
-  const getTotalReviews = (reviews: Review[]): number => {
-    return reviews.length;
-  };
-
-  const markHelpful = (reviewId: number): void => {
-    // This is a placeholder function - could be implemented with backend API
-    console.log(`Marking review ${reviewId} as helpful`);
-  };
-
   return (
     <ReviewContext.Provider value={{
       reviews,
@@ -217,10 +199,7 @@ export const ReviewProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       deleteReview,
       getProductRating,
       canUserReview,
-      refreshReviews,
-      getAverageRating,
-      getTotalReviews,
-      markHelpful
+      refreshReviews
     }}>
       {children}
     </ReviewContext.Provider>

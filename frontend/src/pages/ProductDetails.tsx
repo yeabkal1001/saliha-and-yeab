@@ -85,7 +85,7 @@ const ProductDetails = () => {
             >
               <div className="aspect-square rounded-2xl overflow-hidden bg-gray-100">
                 <img
-                  src={product.image}
+                  src={product.image_url}
                   alt={product.title}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
@@ -108,11 +108,11 @@ const ProductDetails = () => {
                       <Star
                         key={i}
                         size={20}
-                        className={i < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
+                        className={i < Math.floor(product.reviews.length > 0 ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length : 0) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}
                       />
                     ))}
                   </div>
-                  <span className="text-gray-600">({product.reviews} reviews)</span>
+                  <span className="text-gray-600">({product.reviews.length} reviews)</span>
                 </div>
 
                 <div className="text-4xl font-bold text-blue-600 mb-4">
@@ -125,7 +125,7 @@ const ProductDetails = () => {
 
                 <div className="flex items-center gap-2 mb-6">
                   <span className="text-gray-600">Sold by:</span>
-                  <span className="font-medium text-blue-600">{product.seller}</span>
+                  <span className="font-medium text-blue-600">{product.user.name}</span>
                 </div>
 
                 <div className="flex items-center gap-2 mb-6">
