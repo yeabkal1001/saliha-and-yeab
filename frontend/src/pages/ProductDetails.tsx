@@ -130,8 +130,8 @@ const ProductDetails = () => {
 
                 <div className="flex items-center gap-2 mb-6">
                   <span className="text-gray-600">Stock:</span>
-                  <span className={`font-medium ${product.stock > 0 ? 'text-green-600' : 'text-red-600'}`}>
-                    {product.stock > 0 ? `${product.stock} available` : 'Out of stock'}
+                  <span className={`font-medium ${product.stock_quantity > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    {product.stock_quantity > 0 ? `${product.stock_quantity} available` : 'Out of stock'}
                   </span>
                 </div>
               </div>
@@ -150,9 +150,9 @@ const ProductDetails = () => {
                     </button>
                     <span className="px-4 py-2 border-x">{quantity}</span>
                     <button
-                      onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                      onClick={() => setQuantity(Math.min(product.stock_quantity, quantity + 1))}
                       className="px-3 py-2 hover:bg-gray-100 transition-colors"
-                      disabled={quantity >= product.stock}
+                      disabled={quantity >= product.stock_quantity}
                     >
                       +
                     </button>
@@ -162,12 +162,12 @@ const ProductDetails = () => {
                 <div className="flex gap-4">
                   <Button
                     onClick={handleAddToCart}
-                    disabled={product.stock === 0}
+                    disabled={product.stock_quantity === 0}
                     className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
                     size="lg"
                   >
                     <ShoppingCart className="mr-2" size={20} />
-                    {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                    {product.stock_quantity === 0 ? 'Out of Stock' : 'Add to Cart'}
                   </Button>
                   
                   <Button
@@ -261,15 +261,15 @@ const ProductDetails = () => {
                         </div>
                         <div className="flex justify-between py-2 border-b">
                           <span className="font-medium">Brand</span>
-                          <span>{product.seller}</span>
+                                                     <span>{product.user.name}</span>
                         </div>
                         <div className="flex justify-between py-2 border-b">
                           <span className="font-medium">Stock</span>
-                          <span>{product.stock} units</span>
+                                                     <span>{product.stock_quantity} units</span>
                         </div>
                         <div className="flex justify-between py-2 border-b">
                           <span className="font-medium">Rating</span>
-                          <span>{product.rating}/5 stars</span>
+                                                     <span>{product.reviews.length > 0 ? (product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length).toFixed(1) : 'No'} /5 stars</span>
                         </div>
                       </div>
                       <div className="space-y-3">

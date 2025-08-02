@@ -37,8 +37,8 @@ const EditProduct = () => {
         description: product.description,
         price: product.price.toString(),
         category: product.category,
-        image: product.image,
-        stock: product.stock.toString()
+        image: product.image_url,
+        stock: product.stock_quantity.toString()
       });
     }
   }, [product]);
@@ -79,8 +79,8 @@ const EditProduct = () => {
       description: formData.description,
       price: parseFloat(formData.price),
       category: formData.category,
-      image: formData.image,
-      stock: parseInt(formData.stock)
+      image_url: formData.image,
+              stock_quantity: parseInt(formData.stock)
     });
 
     toast({
@@ -204,7 +204,7 @@ const EditProduct = () => {
 
                   <ImageUpload
                     value={formData.image}
-                    onChange={(url) => handleChange('image', url)}
+                    onChange={(value) => handleChange('image', typeof value === 'string' ? value : '')}
                     label="Product Image *"
                   />
 

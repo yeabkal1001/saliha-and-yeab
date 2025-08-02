@@ -192,7 +192,7 @@ const AddProduct = () => {
 
                   <ImageUpload
                     value={formData.image}
-                    onChange={(url) => handleChange('image', url)}
+                    onChange={(value) => handleChange('image', typeof value === 'string' ? value : '')}
                     label="Product Image *"
                   />
 

@@ -122,17 +122,17 @@ const MyListings = () => {
                   <Card className="overflow-hidden hover:shadow-lg transition-shadow bg-white border-blue-200">
                     <div className="relative">
                       <img
-                        src={product.image}
+                        src={product.image_url}
                         alt={product.title}
                         className="w-full h-48 object-cover"
                       />
                       <div className="absolute top-2 right-2">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          product.stock > 0 
+                          product.stock_quantity > 0 
                             ? 'bg-green-100 text-green-800' 
                             : 'bg-red-100 text-red-800'
                         }`}>
-                          {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+                          {product.stock_quantity > 0 ? `${product.stock_quantity} in stock` : 'Out of stock'}
                         </span>
                       </div>
                     </div>
@@ -148,7 +148,7 @@ const MyListings = () => {
                       <div className="flex justify-between items-center mb-4">
                         <span className="text-2xl font-bold text-blue-600">${product.price}</span>
                         <div className="text-sm text-gray-500">
-                          {product.reviews} reviews
+                          {product.reviews.length} reviews
                         </div>
                       </div>
 

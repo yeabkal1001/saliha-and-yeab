@@ -39,7 +39,7 @@ const OrderManagement = () => {
     estimatedDelivery: ''
   });
 
-  const sellerOrders = getSellerOrders(user?.id || '1');
+  const { sellerOrders } = useOrders();
   
   const filteredOrders = selectedStatus === 'all' 
     ? sellerOrders 
@@ -93,9 +93,9 @@ const OrderManagement = () => {
       return;
     }
 
-    const updateData: any = {
-      orderId,
-      status: updateForm.status as any,
+    const updateData = {
+      orderId: parseInt(orderId),
+      status: updateForm.status as 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled',
     };
 
     if (updateForm.notes) updateData.notes = updateForm.notes;
@@ -115,7 +115,7 @@ const OrderManagement = () => {
     setUpdateForm({ status: '', notes: '', trackingNumber: '', estimatedDelivery: '' });
   };
 
-  const openUpdateDialog = (order: any) => {
+  const openUpdateDialog = (order: Order) => {
     setSelectedOrder(order.id);
     setUpdateForm({
       status: order.status,

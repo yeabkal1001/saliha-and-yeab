@@ -29,14 +29,14 @@ const SellerDashboard = () => {
   const { user } = useAuth();
   const [timeRange, setTimeRange] = useState('30d');
 
-  const sellerProducts = products.filter(p => p.sellerId === user?.id);
-  const sellerOrders = getSellerOrders(user?.id || '1');
+  const sellerProducts = products.filter(p => p.user_id === user?.id);
+  const { sellerOrders } = useOrders();
 
   // Calculate metrics
-  const totalRevenue = sellerOrders.reduce((sum, order) => sum + order.total, 0);
+  const totalRevenue = sellerOrders.reduce((sum, order) => sum + order.total_amount, 0);
   const totalOrders = sellerOrders.length;
   const totalProducts = sellerProducts.length;
-  const averageRating = sellerProducts.reduce((sum, p) => sum + p.rating, 0) / sellerProducts.length || 0;
+  const averageRating = sellerProducts.reduce((sum, p) => sum + (p.reviews.length > 0 ? p.reviews.reduce((rSum, r) => rSum + r.rating, 0) / p.reviews.length : 0), 0) / sellerProducts.length || 0;
 
   // Sales data for charts
   const salesData = [

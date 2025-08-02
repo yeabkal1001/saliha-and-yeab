@@ -57,6 +57,7 @@ interface ProductContextType {
   placeOrder: (shippingAddress: string) => void;
   getSellerOrders: (sellerId: string) => Order[];
   refreshProducts: () => void;
+  getCartTotal: () => number;
 }
 
 const ProductContext = createContext<ProductContextType | null>(null);
@@ -171,7 +172,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
     } catch (err) {
       console.error('Failed to delete product:', err);
       addNotification({
-        type: 'error',
+        type: 'message',
         title: 'Error',
         message: 'Failed to delete product. Please try again.'
       });
@@ -191,7 +192,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return [...prevCart, { product, quantity }];
     });
     addNotification({
-      type: 'success',
+      type: 'message',
       title: 'Added to Cart',
       message: `${product.title} added to cart!`
     });
@@ -275,25 +276,29 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       );
 
       clearCart();
-      addNotification({
-        type: 'success',
-        title: 'Order Placed!',
-        message: 'Your order has been placed successfully!'
-      });
+              addNotification({
+          type: 'message',
+          title: 'Order Placed!',
+          message: 'Your order has been placed successfully!'
+        });
     } catch (err) {
       console.error('Failed to place order:', err);
-      addNotification({
-        type: 'error',
-        title: 'Order Failed',
-        message: 'Failed to place order. Please try again.'
-      });
+              addNotification({
+          type: 'message',
+          title: 'Order Failed',
+          message: 'Failed to place order. Please try again.'
+        });
     }
   };
 
-  const getSellerOrders = (sellerId: string): Order[] => {
-    return orders.filter(order =>
+    const getSellerOrders = (sellerId: string): Order[] => {
+    return orders.filter(order => 
       order.items.some(item => item.product.user_id === sellerId)
     );
+  };
+
+  const getCartTotal = (): number => {
+    return cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
   };
 
   return (
@@ -312,8 +317,9 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       updateCartQuantity,
       clearCart,
       placeOrder,
-      getSellerOrders,
-      refreshProducts
+              getSellerOrders,
+        refreshProducts,
+        getCartTotal
     }}>
       {children}
     </ProductContext.Provider>

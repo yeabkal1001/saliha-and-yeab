@@ -111,18 +111,16 @@ const Checkout = () => {
         quantity: item.quantity
       }));
 
-      const newOrder = {
-        userId: user?.id || '1',
-        userName: `${formData.firstName} ${formData.lastName}`,
-        userEmail: formData.email,
-        items: orderItems,
-        total,
-        status: 'pending' as const,
-        shippingAddress: `${formData.address}, ${formData.city}, ${formData.state} ${formData.zipCode}`,
-        notes: formData.notes
+      const orderData = {
+        shipping_address: `${formData.address}, ${formData.city}, ${formData.state} ${formData.zipCode}`,
+        billing_address: `${formData.address}, ${formData.city}, ${formData.state} ${formData.zipCode}`,
+        order_items: orderItems.map(item => ({
+          product_id: parseInt(item.product.id),
+          quantity: item.quantity
+        }))
       };
 
-      addOrder(newOrder);
+      addOrder(orderData);
       clearCart();
       
       toast({
@@ -491,7 +489,7 @@ const Checkout = () => {
                     {cart.map((item) => (
                       <div key={`${item.product.id}-${item.quantity}`} className="flex items-center gap-3">
                         <img
-                          src={item.product.image}
+                                                     src={item.product.image_url}
                           alt={item.product.title}
                           className="w-16 h-16 object-cover rounded"
                         />
