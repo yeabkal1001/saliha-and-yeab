@@ -101,7 +101,7 @@ const OrderManagement = () => {
     if (updateForm.notes) updateData.notes = updateForm.notes;
     if (updateForm.trackingNumber) updateData.trackingNumber = updateForm.trackingNumber;
     if (updateForm.estimatedDelivery) {
-      updateData.estimatedDelivery = new Date(updateForm.estimatedDelivery);
+      updateData.estimated_delivery = updateForm.estimatedDelivery;
     }
 
     updateOrderStatus(updateData);
@@ -130,7 +130,7 @@ const OrderManagement = () => {
   const orderStats = {
     total: sellerOrders.length,
     pending: sellerOrders.filter(o => o.status === 'pending').length,
-    processing: sellerOrders.filter(o => o.status === 'processing').length,
+    paid: sellerOrders.filter(o => o.status === 'paid').length,
     shipped: sellerOrders.filter(o => o.status === 'shipped').length,
     delivered: sellerOrders.filter(o => o.status === 'delivered').length,
   };
@@ -173,8 +173,8 @@ const OrderManagement = () => {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-purple-100">Processing</p>
-                  <p className="text-2xl font-bold">{orderStats.processing}</p>
+                  <p className="text-purple-100">Paid</p>
+                  <p className="text-2xl font-bold">{orderStats.paid}</p>
                 </div>
                 <Package className="h-8 w-8 text-purple-200" />
               </div>
@@ -254,15 +254,15 @@ const OrderManagement = () => {
                         <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
                           <div className="flex items-center gap-1">
                             <User className="h-4 w-4" />
-                            {order.userName}
+                            {order.user?.name || 'Unknown User'}
                           </div>
                           <div className="flex items-center gap-1">
                             <Mail className="h-4 w-4" />
-                            {order.userEmail}
+                            {order.user?.email || 'No email'}
                           </div>
                           <div className="flex items-center gap-1">
                             <Calendar className="h-4 w-4" />
-                            {order.createdAt.toLocaleDateString()}
+                            {new Date(order.created_at).toLocaleDateString()}
                           </div>
                         </div>
                       </div>
@@ -285,12 +285,12 @@ const OrderManagement = () => {
                               <div className="grid grid-cols-2 gap-4">
                                 <div>
                                   <Label className="font-medium">Customer</Label>
-                                  <p>{order.userName}</p>
-                                  <p className="text-sm text-gray-600">{order.userEmail}</p>
+                                  <p>{order.user?.name || 'Unknown User'}</p>
+                                  <p className="text-sm text-gray-600">{order.user?.email || 'No email'}</p>
                                 </div>
                                 <div>
                                   <Label className="font-medium">Order Date</Label>
-                                  <p>{order.createdAt.toLocaleString()}</p>
+                                  <p>{new Date(order.created_at).toLocaleString()}</p>
                                 </div>
                               </div>
                               
@@ -298,31 +298,31 @@ const OrderManagement = () => {
                                 <Label className="font-medium">Shipping Address</Label>
                                 <p className="flex items-center gap-1">
                                   <MapPin className="h-4 w-4" />
-                                  {order.shippingAddress}
+                                  {order.shipping_address}
                                 </p>
                               </div>
 
-                              {order.trackingNumber && (
+                              {order.tracking_number && (
                                 <div>
                                   <Label className="font-medium">Tracking Number</Label>
-                                  <p className="font-mono">{order.trackingNumber}</p>
+                                  <p className="font-mono">{order.tracking_number}</p>
                                 </div>
                               )}
 
-                              {order.estimatedDelivery && (
+                              {order.estimated_delivery && (
                                 <div>
                                   <Label className="font-medium">Estimated Delivery</Label>
-                                  <p>{new Date(order.estimatedDelivery).toLocaleDateString()}</p>
+                                  <p>{new Date(order.estimated_delivery).toLocaleDateString()}</p>
                                 </div>
                               )}
 
                               <div>
                                 <Label className="font-medium">Items</Label>
                                 <div className="space-y-2 mt-2">
-                                  {order.items.map(item => (
+                                  {order.order_items.map(item => (
                                     <div key={item.id} className="flex items-center gap-3 p-2 bg-gray-50 rounded">
                                       <img 
-                                        src={item.product.image} 
+                                        src={item.product.image_url} 
                                         alt={item.product.title}
                                         className="w-12 h-12 object-cover rounded"
                                       />
@@ -339,7 +339,7 @@ const OrderManagement = () => {
                               <div className="border-t pt-4">
                                 <div className="flex justify-between items-center">
                                   <span className="font-medium">Total</span>
-                                  <span className="text-xl font-bold text-blue-600">${order.total.toFixed(2)}</span>
+                                  <span className="text-xl font-bold text-blue-600">${order.total_amount.toFixed(2)}</span>
                                 </div>
                               </div>
                             </div>
@@ -359,19 +359,19 @@ const OrderManagement = () => {
                     <div className="flex justify-between items-center mb-3">
                       <div className="flex items-center gap-1">
                         <MapPin className="h-4 w-4 text-gray-500" />
-                        <span className="text-sm text-gray-600">{order.shippingAddress}</span>
+                        <span className="text-sm text-gray-600">{order.shipping_address}</span>
                       </div>
-                      <span className="text-xl font-bold text-blue-600">${order.total.toFixed(2)}</span>
+                      <span className="text-xl font-bold text-blue-600">${order.total_amount.toFixed(2)}</span>
                     </div>
                     
                     <div className="flex items-center gap-4 text-sm text-gray-600">
-                      <span>{order.items.length} item{order.items.length !== 1 ? 's' : ''}</span>
-                      {order.trackingNumber && (
-                        <span className="font-mono">Tracking: {order.trackingNumber}</span>
-                      )}
-                      {order.estimatedDelivery && (
-                        <span>ETA: {new Date(order.estimatedDelivery).toLocaleDateString()}</span>
-                      )}
+                      <span>{order.order_items.length} item{order.order_items.length !== 1 ? 's' : ''}</span>
+                                              {order.tracking_number && (
+                          <span className="font-mono">Tracking: {order.tracking_number}</span>
+                        )}
+                                              {order.estimated_delivery && (
+                          <span>ETA: {new Date(order.estimated_delivery).toLocaleDateString()}</span>
+                        )}
                     </div>
 
                     {order.notes && (

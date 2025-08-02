@@ -1,18 +1,18 @@
 default: &default
-  adapter: mysql2
-  encoding: utf8mb4
+  adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DATABASE_USERNAME") { "rails_user" } %>
-  password: <%= ENV.fetch("DATABASE_PASSWORD") { "rails_password" } %>
-  host: <%= ENV.fetch("DATABASE_HOST") { "db" } %>
+  username: <%= ENV.fetch("DATABASE_USERNAME") { "postgres" } %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") { "password" } %>
+  host: <%= ENV.fetch("DATABASE_HOST") { "localhost" } %>
 
 development:
   <<: *default
-  database: rails_app_development
+  database: shop_ease_development
 
 test:
   <<: *default
-  database: rails_app_test
+  database: shop_ease_test
 
 production:
   <<: *default

@@ -29,9 +29,11 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Handle unauthorized access
+      // Handle unauthorized access - don't redirect automatically
+      console.log('API: 401 Unauthorized - clearing auth tokens');
       localStorage.removeItem('authToken');
-      window.location.href = '/signin';
+      localStorage.removeItem('user');
+      // Don't redirect to signin - let the app handle it
     }
     return Promise.reject(error);
   }
@@ -52,8 +54,8 @@ export const postsAPI = {
 export const productsAPI = {
   getAll: () => api.get('/api/v1/products'),
   getById: (id: number) => api.get(`/api/v1/products/${id}`),
-  create: (data: any) => api.post('/api/v1/products', { product: data }),
-  update: (id: number, data: any) => 
+  create: (data: Record<string, unknown>) => api.post('/api/v1/products', { product: data }),
+  update: (id: number, data: Record<string, unknown>) => 
     api.put(`/api/v1/products/${id}`, { product: data }),
   delete: (id: number) => api.delete(`/api/v1/products/${id}`),
   search: (query: string) => api.get(`/api/v1/products/search?q=${query}`),
@@ -63,8 +65,8 @@ export const productsAPI = {
 export const ordersAPI = {
   getAll: () => api.get('/api/v1/orders'),
   getById: (id: number) => api.get(`/api/v1/orders/${id}`),
-  create: (data: any) => api.post('/api/v1/orders', { order: data }),
-  update: (id: number, data: any) => 
+  create: (data: Record<string, unknown>) => api.post('/api/v1/orders', { order: data }),
+  update: (id: number, data: Record<string, unknown>) => 
     api.put(`/api/v1/orders/${id}`, { order: data }),
   delete: (id: number) => api.delete(`/api/v1/orders/${id}`),
   getSellerOrders: () => api.get('/api/v1/orders/seller_orders'),

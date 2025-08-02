@@ -1,27 +1,64 @@
-FROM ruby:3.2.2
+# Build stage
+FROM ruby:3.2-alpine AS builder
 
-# Install system dependencies
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+# Install build dependencies
+RUN apk add --no-cache \
+    build-base \
+    postgresql-dev \
+    tzdata \
+    nodejs \
+    yarn
 
-# Set working directory
 WORKDIR /app
 
-# Install gems
+# Copy Gemfile and install dependencies
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --without development test
+RUN bundle config set --local without 'development test' && \
+    bundle install --jobs 4 --retry 3
 
-# Copy the main application
+# Copy application code
 COPY . .
 
 # Precompile assets
-RUN bundle exec rake assets:precompile
+RUN bundle exec rails assets:precompile RAILS_ENV=production
 
-# Add a script to be executed every time the container starts
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+# Production stage
+FROM ruby:3.2-alpine
 
+# Install runtime dependencies
+RUN apk add --no-cache \
+    postgresql-client \
+    tzdata \
+    nodejs \
+    yarn
+
+# Create app user
+RUN addgroup -g 1000 -S app && \
+    adduser -u 1000 -S app -G app
+
+WORKDIR /app
+
+# Copy built gems from builder stage
+COPY --from=builder /usr/local/bundle /usr/local/bundle
+
+# Copy application code
+COPY --from=builder /app /app
+
+# Copy precompiled assets
+COPY --from=builder /app/public/assets /app/public/assets
+
+# Set ownership
+RUN chown -R app:app /app
+
+# Switch to app user
+USER app
+
+# Expose port
 EXPOSE 3000
 
-# Configure the main process to run when running the image
-CMD ["rails", "server", "-b", "0.0.0.0"] 
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:3000/health || exit 1
+
+# Start the application
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"] 

@@ -1,287 +1,307 @@
-# 🚀 Rails + React Full-Stack Application
+# Yeab-Saliha E-commerce Platform
 
-A modern full-stack web application built with Ruby on Rails API backend and React frontend, containerized with Docker and MySQL database.
+A full-stack e-commerce platform built with React (TypeScript) frontend and Ruby on Rails backend.
 
-<!-- Updated by salihaabdo - Testing Git configuration -->
-<!-- Another update by salihaabdo - Git is working perfectly! -->
+## 🚀 Features
 
-## 🏗️ Architecture
+- **User Authentication**: Secure signup/login with JWT tokens
+- **Product Management**: Add, edit, and manage products with images
+- **Shopping Cart**: Add/remove items with quantity management
+- **Order Management**: Complete order lifecycle for buyers and sellers
+- **Wishlist**: Save favorite products
+- **Search & Filtering**: Advanced product search and filtering
+- **Responsive Design**: Mobile-first responsive UI
+- **Real-time Updates**: Live order status updates
+- **Admin Dashboard**: Seller analytics and management tools
 
-- **Backend**: Ruby on Rails 7.0 API with JWT authentication
-- **Frontend**: React 18 + TypeScript + Vite with Tailwind CSS
-- **Database**: MySQL 8.0
-- **Containerization**: Docker & Docker Compose
-- **API**: RESTful JSON API with CORS support
-- **Features**: E-commerce platform with products, orders, reviews, and wishlists
+## 🛠 Tech Stack
+
+### Frontend
+- **React 18** with TypeScript
+- **Vite** for fast development and optimized builds
+- **Tailwind CSS** for styling
+- **Radix UI** for accessible components
+- **React Router** for navigation
+- **React Query** for data fetching
+- **Framer Motion** for animations
+- **Axios** for API communication
+
+### Backend
+- **Ruby on Rails 7** with API mode
+- **PostgreSQL** database
+- **JWT** authentication
+- **Active Storage** for file uploads
+- **CORS** enabled for cross-origin requests
+
+## 📦 Installation
+
+### Prerequisites
+- Node.js 18+ and npm
+- Ruby 3.2+ and Rails 7
+- PostgreSQL
+
+### Backend Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd yeab-saliha/backend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   bundle install
+   ```
+
+3. **Database setup**
+   ```bash
+   rails db:create
+   rails db:migrate
+   rails db:seed
+   ```
+
+4. **Start the server**
+   ```bash
+   rails server -p 3000
+   ```
+
+### Frontend Setup
+
+1. **Navigate to frontend directory**
+   ```bash
+   cd ../frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment configuration**
+   Create a `.env` file:
+   ```env
+   VITE_API_URL=http://localhost:3000
+   ```
+
+4. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+## 🚀 Production Deployment
+
+### Environment Variables
+
+Create production environment files:
+
+**Backend (.env)**
+```env
+RAILS_ENV=production
+DATABASE_URL=postgresql://username:password@localhost/database_name
+SECRET_KEY_BASE=your_secret_key_base
+JWT_SECRET_KEY=your_jwt_secret
+```
+
+**Frontend (.env.production)**
+```env
+VITE_API_URL=https://your-production-api-domain.com
+```
+
+### Build for Production
+
+1. **Backend**
+   ```bash
+   cd backend
+   RAILS_ENV=production bundle install
+   RAILS_ENV=production rails db:migrate
+   RAILS_ENV=production rails assets:precompile
+   ```
+
+2. **Frontend**
+   ```bash
+   cd frontend
+   npm run build:prod
+   ```
+
+### Deployment Options
+
+#### Option 1: Docker (Recommended)
+
+1. **Build and run with Docker Compose**
+   ```bash
+   docker-compose -f docker-compose.prod.yml up -d
+   ```
+
+#### Option 2: Manual Deployment
+
+1. **Backend (using Passenger/Nginx)**
+   ```bash
+   # Install Passenger
+   gem install passenger
+   passenger-install-nginx-module
+   
+   # Configure Nginx
+   sudo nano /etc/nginx/sites-available/your-app
+   sudo ln -s /etc/nginx/sites-available/your-app /etc/nginx/sites-enabled/
+   sudo systemctl restart nginx
+   ```
+
+2. **Frontend (using Nginx)**
+   ```bash
+   # Copy built files
+   sudo cp -r frontend/dist/* /var/www/html/
+   
+   # Configure Nginx for SPA routing
+   sudo nano /etc/nginx/sites-available/frontend
+   ```
+
+## 🔧 Development
+
+### Available Scripts
+
+**Frontend**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:prod` - Build with production optimizations
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint errors
+- `npm run typecheck` - Run TypeScript type checking
+- `npm run preview` - Preview production build
+
+**Backend**
+- `rails server` - Start development server
+- `rails console` - Open Rails console
+- `rails db:migrate` - Run database migrations
+- `rails db:seed` - Seed database with sample data
+- `rails test` - Run tests
+
+### Code Quality
+
+The project includes:
+- **ESLint** for JavaScript/TypeScript linting
+- **TypeScript** for type safety
+- **Prettier** for code formatting
+- **RuboCop** for Ruby code style
 
 ## 📁 Project Structure
 
 ```
 yeab-saliha/
-├── backend/                 # Rails API application
+├── backend/                 # Rails API backend
 │   ├── app/
 │   │   ├── controllers/     # API controllers
-│   │   └── models/         # ActiveRecord models
+│   │   ├── models/         # ActiveRecord models
+│   │   └── assets/         # Static assets
 │   ├── config/             # Rails configuration
 │   ├── db/                 # Database migrations
-│   ├── Dockerfile          # Backend container
-│   └── Gemfile             # Ruby dependencies
-├── frontend/               # React application
-│   ├── public/             # Static files
-│   ├── src/                # React components
-│   ├── Dockerfile          # Frontend container
-│   └── package.json        # Node.js dependencies
-├── docker-compose.yml      # Multi-container orchestration
-└── README.md              # This file
+│   └── Dockerfile          # Backend Docker config
+├── frontend/               # React frontend
+│   ├── src/
+│   │   ├── components/     # Reusable components
+│   │   ├── contexts/       # React contexts
+│   │   ├── pages/          # Page components
+│   │   ├── hooks/          # Custom hooks
+│   │   └── lib/            # Utilities and API
+│   ├── public/             # Static assets
+│   └── Dockerfile          # Frontend Docker config
+└── docker-compose.yml      # Development Docker setup
 ```
 
-## 🚀 Quick Start
+## 🔒 Security Features
 
-### Prerequisites
+- JWT token-based authentication
+- CORS configuration
+- Input validation and sanitization
+- SQL injection prevention
+- XSS protection
+- CSRF protection
 
-- Docker
-- Docker Compose
+## 📊 Performance Optimizations
 
-### Running the Application
+### Frontend
+- Code splitting with dynamic imports
+- Lazy loading of components
+- Optimized bundle size with chunk splitting
+- Image optimization
+- Caching strategies
 
-1. **Clone and navigate to the project:**
-   ```bash
-   cd yeab-saliha
-   ```
+### Backend
+- Database query optimization
+- N+1 query prevention
+- Caching with Redis (optional)
+- Asset compression
+- CDN integration ready
 
-2. **Start all services:**
-   ```bash
-   docker-compose up --build
-   ```
+## 🧪 Testing
 
-3. **Access the applications:**
-   - Frontend: http://localhost:3001
-   - Backend API: http://localhost:3000
-   - Database: localhost:3306
-
-### First Time Setup
-
-The application will automatically:
-- Create the MySQL database
-- Run Rails migrations
-- Install all dependencies
-- Start both frontend and backend services
-
-## 🛠️ Development
-
-### Backend (Rails API)
-
-The Rails backend provides a comprehensive RESTful API for an e-commerce platform:
-
-**Authentication:**
-- `POST /api/v1/auth/signup` - User registration
-- `POST /api/v1/auth/signin` - User login
-- `DELETE /api/v1/auth/signout` - User logout
-- `GET /api/v1/auth/me` - Get current user
-
-**Products:**
-- `GET /api/v1/products` - List all products
-- `GET /api/v1/products/:id` - Get product details
-- `POST /api/v1/products` - Create new product
-- `PUT /api/v1/products/:id` - Update product
-- `DELETE /api/v1/products/:id` - Delete product
-- `GET /api/v1/products/search?q=query` - Search products
-
-**Orders:**
-- `GET /api/v1/orders` - List user orders
-- `GET /api/v1/orders/:id` - Get order details
-- `POST /api/v1/orders` - Create new order
-- `PUT /api/v1/orders/:id` - Update order
-- `DELETE /api/v1/orders/:id` - Cancel order
-
-**Reviews:**
-- `GET /api/v1/products/:id/reviews` - Get product reviews
-- `POST /api/v1/products/:id/reviews` - Create review
-- `PUT /api/v1/reviews/:id` - Update review
-- `DELETE /api/v1/reviews/:id` - Delete review
-
-**Wishlist:**
-- `GET /api/v1/wishlist` - Get user wishlist
-- `POST /api/v1/wishlist` - Add to wishlist
-- `DELETE /api/v1/wishlist/:id` - Remove from wishlist
-
-**Features:**
-- JWT-based authentication
-- MySQL database integration
-- CORS enabled for frontend communication
-- JSON API responses
-- RESTful routing
-- Comprehensive e-commerce functionality
-
-### Frontend (React)
-
-The React frontend provides a modern, responsive UI for a full e-commerce platform.
-
-**Features:**
-- User authentication and authorization
-- Product browsing and search
-- Shopping cart functionality
-- Order management
-- Product reviews and ratings
-- Wishlist management
-- Responsive design with Tailwind CSS
-- TypeScript for type safety
-- Vite for fast development
-- Modern UI components with Radix UI
-- Real-time form validation
-- Axios for API communication
-
-## 🐳 Docker Services
-
-### Database (MySQL)
-- **Port**: 3306
-- **Database**: rails_app_development
-- **Username**: rails_user
-- **Password**: rails_password
-
-### Backend (Rails)
-- **Port**: 3000
-- **Environment**: Development
-- **Auto-reload**: Enabled
-
-### Frontend (React)
-- **Port**: 3001
-- **Environment**: Development
-- **Hot reload**: Enabled
-
-## 🔧 Configuration
-
-### Environment Variables
-
-The application uses the following environment variables:
-
-**Backend:**
-- `DATABASE_URL`: MySQL connection string
-- `RAILS_ENV`: Rails environment (development/production)
-
-**Frontend:**
-- `REACT_APP_API_URL`: Backend API URL
-
-### Database Configuration
-
-Database settings are configured in `backend/config/database.yml` and can be customized for different environments.
-
-## 📝 API Documentation
-
-### Post Model
-
-```json
-{
-  "id": 1,
-  "title": "Post Title",
-  "content": "Post content...",
-  "created_at": "2024-01-01T00:00:00.000Z",
-  "updated_at": "2024-01-01T00:00:00.000Z"
-}
-```
-
-### API Endpoints
-
-#### Create Post
+### Frontend Testing
 ```bash
-POST /api/v1/posts
-Content-Type: application/json
-
-{
-  "post": {
-    "title": "My Post",
-    "content": "Post content here"
-  }
-}
+npm run test
 ```
 
-#### Get All Posts
+### Backend Testing
 ```bash
-GET /api/v1/posts
+rails test
 ```
 
-#### Get Single Post
-```bash
-GET /api/v1/posts/:id
-```
+## 📈 Monitoring & Analytics
 
-#### Update Post
-```bash
-PUT /api/v1/posts/:id
-Content-Type: application/json
-
-{
-  "post": {
-    "title": "Updated Title",
-    "content": "Updated content"
-  }
-}
-```
-
-#### Delete Post
-```bash
-DELETE /api/v1/posts/:id
-```
-
-## 🚀 Deployment
-
-### Production Setup
-
-1. **Update environment variables for production**
-2. **Build production images:**
-   ```bash
-   docker-compose -f docker-compose.prod.yml up --build
-   ```
-
-### Scaling
-
-The application can be scaled horizontally by running multiple instances of the frontend and backend services.
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **Port conflicts**: Ensure ports 3000, 3001, and 3306 are available
-2. **Database connection**: Wait for MySQL to fully start before accessing the API
-3. **CORS issues**: Check that the frontend is making requests to the correct backend URL
-
-### Logs
-
-View logs for specific services:
-```bash
-# Backend logs
-docker-compose logs backend
-
-# Frontend logs
-docker-compose logs frontend
-
-# Database logs
-docker-compose logs db
-```
+- Error tracking with Sentry (configurable)
+- Performance monitoring
+- User analytics
+- Order tracking and notifications
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Test thoroughly
+4. Add tests
 5. Submit a pull request
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the MIT License.
 
-## 🎉 What's Next?
+## 🆘 Support
 
-This is a foundation for building more complex applications. You can extend it by:
+For support and questions:
+- Create an issue in the repository
+- Contact the development team
+- Check the documentation
 
-- Adding user authentication
-- Implementing real-time features with Action Cable
-- Adding file uploads with Active Storage
-- Creating more complex data models
-- Adding testing with RSpec and Jest
-- Implementing CI/CD pipelines
+## 🔄 Updates
+
+To update the application:
+
+1. **Pull latest changes**
+   ```bash
+   git pull origin main
+   ```
+
+2. **Update dependencies**
+   ```bash
+   # Frontend
+   cd frontend && npm install
+   
+   # Backend
+   cd backend && bundle install
+   ```
+
+3. **Run migrations**
+   ```bash
+   cd backend && rails db:migrate
+   ```
+
+4. **Rebuild and restart**
+   ```bash
+   # Frontend
+   cd frontend && npm run build:prod
+   
+   # Backend
+   cd backend && rails restart
+   ```
 
 ---
 
-**Happy coding! 🚀** 
+**Note**: Make sure to update environment variables and database configurations according to your production setup. 

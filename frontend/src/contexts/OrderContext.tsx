@@ -33,6 +33,15 @@ export interface Order {
   tracking_number?: string;
   estimated_delivery?: string;
   notes?: string;
+  // Additional properties for compatibility
+  items?: OrderItem[];
+  total?: number;
+  userName?: string;
+  userEmail?: string;
+  createdAt?: string;
+  trackingNumber?: string;
+  estimatedDelivery?: string;
+  shippingAddress?: string;
 }
 
 export interface OrderUpdate {
@@ -41,6 +50,9 @@ export interface OrderUpdate {
   notes?: string;
   tracking_number?: string;
   estimated_delivery?: string;
+  // Additional properties for compatibility
+  trackingNumber?: string;
+  estimatedDelivery?: string;
 }
 
 interface OrderContextType {
@@ -103,11 +115,14 @@ export const OrderProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [user]);
 
-  // Load orders when user changes
+  // Load orders when user changes - SIMPLIFIED TO PREVENT LOOPS
   useEffect(() => {
-    fetchOrders();
-    fetchSellerOrders();
-  }, [user, fetchOrders, fetchSellerOrders]);
+    // Only fetch if user exists and we haven't loaded yet
+    if (user && orders.length === 0) {
+      fetchOrders();
+      fetchSellerOrders();
+    }
+  }, [user]); // Only depend on user, not the functions
 
   const refreshOrders = async () => {
     await fetchOrders();

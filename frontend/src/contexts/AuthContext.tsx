@@ -59,13 +59,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(null);
       }
     } else {
-      console.log('❌ AuthContext: No existing auth found');
+      console.log('❌ AuthContext: No existing auth found - continuing without auth');
       setUser(null);
     }
     
     // Set loading to false immediately
     setLoading(false);
-  }, []);
+  }, []); // Empty dependency array to prevent infinite loops
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
@@ -84,9 +84,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       localStorage.setItem('user', JSON.stringify(convertedUser));
       setUser(convertedUser);
       return true;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Login failed:', err);
-      const errorMessage = err.response?.data?.error || 'Login failed. Please check your credentials.';
+      const errorMessage = err instanceof Error ? err.message : 'Login failed. Please check your credentials.';
       setError(errorMessage);
       return false;
     } finally {
@@ -111,9 +111,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       localStorage.setItem('user', JSON.stringify(convertedUser));
       setUser(convertedUser);
       return true;
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Registration failed:', err);
-      const errorMessage = err.response?.data?.error || 'Registration failed. Please try again.';
+      const errorMessage = err instanceof Error ? err.message : 'Registration failed. Please try again.';
       setError(errorMessage);
       return false;
     } finally {

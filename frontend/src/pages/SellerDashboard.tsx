@@ -61,17 +61,17 @@ const SellerDashboard = () => {
 
   const orderStatusData = [
     { status: 'Pending', count: sellerOrders.filter(o => o.status === 'pending').length, color: '#f59e0b' },
-    { status: 'Processing', count: sellerOrders.filter(o => o.status === 'processing').length, color: '#8b5cf6' },
+    { status: 'Paid', count: sellerOrders.filter(o => o.status === 'paid').length, color: '#8b5cf6' },
     { status: 'Shipped', count: sellerOrders.filter(o => o.status === 'shipped').length, color: '#3b82f6' },
     { status: 'Delivered', count: sellerOrders.filter(o => o.status === 'delivered').length, color: '#10b981' },
   ];
 
   const topProducts = sellerProducts
-    .sort((a, b) => b.reviews - a.reviews)
+    .sort((a, b) => b.reviews.length - a.reviews.length)
     .slice(0, 5);
 
   const recentOrders = sellerOrders
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
     .slice(0, 5);
 
   return (
@@ -328,7 +328,7 @@ const SellerDashboard = () => {
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-2">
                         {order.status === 'pending' && <Clock className="h-4 w-4 text-yellow-600" />}
-                        {order.status === 'processing' && <Package className="h-4 w-4 text-blue-600" />}
+                        {order.status === 'paid' && <Package className="h-4 w-4 text-blue-600" />}
                         {order.status === 'shipped' && <TrendingUp className="h-4 w-4 text-indigo-600" />}
                         {order.status === 'delivered' && <CheckCircle className="h-4 w-4 text-green-600" />}
                         <span className="font-medium">Order {order.id}</span>
@@ -344,7 +344,7 @@ const SellerDashboard = () => {
                         variant={order.status === 'delivered' ? 'default' : 'secondary'}
                         className={
                           order.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                          order.status === 'processing' ? 'bg-blue-100 text-blue-800' :
+                          order.status === 'paid' ? 'bg-blue-100 text-blue-800' :
                           order.status === 'shipped' ? 'bg-indigo-100 text-indigo-800' :
                           'bg-green-100 text-green-800'
                         }
