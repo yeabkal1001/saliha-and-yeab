@@ -43,7 +43,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const token = localStorage.getItem('authToken');
         if (token) {
           // Verify token with backend
-          const response = await api.get('/auth/me');
+          const response = await api.get('/api/v1/auth/me');
           if (response.data.user) {
             setUser(response.data.user);
           } else {
@@ -67,7 +67,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       setLoading(true);
-      const response = await api.post('/auth/signin', { email, password });
+      const response = await api.post('/api/v1/auth/signin', { email, password });
       
       const { token, user: userData } = response.data;
       
@@ -99,7 +99,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = async (name: string, email: string, password: string, store_name?: string): Promise<boolean> => {
     try {
       setLoading(true);
-      const response = await api.post('/auth/signup', { 
+      const response = await api.post('/api/v1/auth/signup', { 
         name, 
         email, 
         password, 
@@ -148,7 +148,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const updateProfile = async (data: Partial<User>): Promise<boolean> => {
     try {
       setLoading(true);
-      const response = await api.put('/auth/profile', data);
+      const response = await api.put('/api/v1/auth/profile', data);
       
       // Update user state with new data
       setUser(prev => prev ? { ...prev, ...response.data.user } : null);
