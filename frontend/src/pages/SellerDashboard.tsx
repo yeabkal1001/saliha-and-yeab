@@ -339,7 +339,7 @@ const SellerDashboard = () => {
                       </div>
                     </div>
                     <div className="text-right">
-                                             <p className="font-bold">${order.total_amount.toFixed(2)}</p>
+                                             <p className="font-bold">${typeof order.total_amount === 'string' ? parseFloat(order.total_amount).toFixed(2) : order.total_amount.toFixed(2)}</p>
                       <Badge 
                         variant={order.status === 'delivered' ? 'default' : 'secondary'}
                         className={

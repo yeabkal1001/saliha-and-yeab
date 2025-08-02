@@ -105,7 +105,7 @@ const Orders = () => {
                           {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                         </Badge>
                         <span className="text-lg font-bold text-blue-600">
-                          ${order.total_amount.toFixed(2)}
+                          ${typeof order.total_amount === 'string' ? parseFloat(order.total_amount).toFixed(2) : order.total_amount.toFixed(2)}
                         </span>
                       </div>
                     </div>
@@ -123,7 +123,7 @@ const Orders = () => {
                             <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                           </div>
                           <div className="text-right">
-                            <p className="font-medium">${(item.price * item.quantity).toFixed(2)}</p>
+                            <p className="font-medium">${((typeof item.price === 'string' ? parseFloat(item.price) : item.price) * item.quantity).toFixed(2)}</p>
                           </div>
                         </div>
                       ))}
