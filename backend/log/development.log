@@ -13095,3 +13095,323 @@ Processing by Api::V1::OrdersController#index as HTML
 Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 1150)
 
 
+Started GET "/api/v1/products" for 172.18.0.1 at 2025-08-02 07:31:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as */*
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 2, 3, 4, 5)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (1, 2, 3, 4, 5, 6)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 2 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 3 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 4 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 5 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 6 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 2.9ms | Allocations: 7381)
+
+
+Started POST "/api/v1/auth/signin" for 172.18.0.1 at 2025-08-02 07:31:17 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthController#signin as */*
+  Parameters: {"email"=>"admin@example.com", "password"=>"admin123", "auth"=>{"email"=>"admin@example.com", "password"=>"admin123"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'admin@example.com' LIMIT 1[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:25:in `signin'
+Completed 200 OK in 191ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 653)
+
+
+Started GET "/api/v1/products" for 172.18.0.1 at 2025-08-02 07:32:02 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/auth/me" for 172.18.0.1 at 2025-08-02 07:32:02 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthController#me as HTML
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.9ms | Allocations: 1068)
+
+
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 2, 3, 4, 5)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (1, 2, 3, 4, 5, 6)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 2 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 3 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 4 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 5 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 6 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 22ms (Views: 0.2ms | ActiveRecord: 3.4ms | Allocations: 8055)
+
+
+Started GET "/api/v1/orders" for 172.18.0.1 at 2025-08-02 07:32:02 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/wishlist" for 172.18.0.1 at 2025-08-02 07:32:02 +0000
+Started GET "/api/v1/reviews/user_reviews" for 172.18.0.1 at 2025-08-02 07:32:02 +0000
+Started GET "/api/v1/orders/seller_orders" for 172.18.0.1 at 2025-08-02 07:32:02 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::OrdersController#seller_orders as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mProduct Pluck (0.2ms)[0m  [1m[34mSELECT `products`.`id` FROM `products` WHERE `products`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/orders_controller.rb:172:in `seller_orders'
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.5ms | Allocations: 1292)
+
+
+Processing by Api::V1::ReviewsController#user_reviews as HTML
+Processing by Api::V1::WishlistController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/reviews_controller.rb:111:in `user_reviews'
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 1.3ms | Allocations: 2290)
+
+
+  [1m[36mWishlistItem Load (0.6ms)[0m  [1m[34mSELECT `wishlist_items`.* FROM `wishlist_items` WHERE `wishlist_items`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/wishlist_controller.rb:12:in `index'
+Processing by Api::V1::OrdersController#index as HTML
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 1.5ms | Allocations: 2720)
+
+
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mOrder Load (0.2ms)[0m  [1m[34mSELECT `orders`.* FROM `orders` WHERE `orders`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/orders_controller.rb:13:in `index'
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.5ms | Allocations: 1426)
+
+
+Started GET "/api/v1/orders" for 172.18.0.1 at 2025-08-02 07:32:02 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::OrdersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT `orders`.* FROM `orders` WHERE `orders`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/orders_controller.rb:13:in `index'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 1150)
+
+
+Started POST "/api/v1/auth/signin" for 172.18.0.1 at 2025-08-02 07:32:15 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthController#signin as HTML
+  Parameters: {"email"=>"yeabsirakayel03@gmail.com", "password"=>"12345678", "auth"=>{"email"=>"yeabsirakayel03@gmail.com", "password"=>"12345678"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'yeabsirakayel03@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:25:in `signin'
+Completed 200 OK in 211ms (Views: 0.3ms | ActiveRecord: 0.6ms | Allocations: 530)
+
+
+Started GET "/api/v1/reviews/user_reviews" for 172.18.0.1 at 2025-08-02 07:32:16 +0000
+Started GET "/api/v1/orders/seller_orders" for 172.18.0.1 at 2025-08-02 07:32:16 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/orders" for 172.18.0.1 at 2025-08-02 07:32:16 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/wishlist" for 172.18.0.1 at 2025-08-02 07:32:16 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::WishlistController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mWishlistItem Load (0.4ms)[0m  [1m[34mSELECT `wishlist_items`.* FROM `wishlist_items` WHERE `wishlist_items`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/wishlist_controller.rb:12:in `index'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 1392)
+
+
+Processing by Api::V1::OrdersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT `orders`.* FROM `orders` WHERE `orders`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/orders_controller.rb:13:in `index'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.7ms | Allocations: 1484)
+
+
+Processing by Api::V1::ReviewsController#user_reviews as HTML
+Processing by Api::V1::OrdersController#seller_orders as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+Started GET "/api/v1/orders" for 172.18.0.1 at 2025-08-02 07:32:16 +0000
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mReview Load (0.8ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`user_id` = 7[0m
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  ↳ app/controllers/api/v1/reviews_controller.rb:111:in `user_reviews'
+  [1m[36mProduct Pluck (0.7ms)[0m  [1m[34mSELECT `products`.`id` FROM `products` WHERE `products`.`user_id` = 7[0m
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.5ms | Allocations: 3233)
+
+
+  ↳ app/controllers/api/v1/orders_controller.rb:172:in `seller_orders'
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 1.6ms | Allocations: 3323)
+
+
+Processing by Api::V1::OrdersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mOrder Load (0.3ms)[0m  [1m[34mSELECT `orders`.* FROM `orders` WHERE `orders`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/orders_controller.rb:13:in `index'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.5ms | Allocations: 1151)
+
+
+Started GET "/api/v1/products" for 172.18.0.1 at 2025-08-02 07:33:28 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/auth/me" for 172.18.0.1 at 2025-08-02 07:33:28 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 2, 3, 4, 5)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (1.0ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (1, 2, 3, 4, 5, 6)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mActiveStorage::Attachment Load (1.8ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mActiveStorage::Attachment Load (1.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 2 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1437)
+
+
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 3 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (2.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 4 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 5 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 6 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 33ms (Views: 0.7ms | ActiveRecord: 9.1ms | Allocations: 9257)
+
+
+Started GET "/api/v1/auth/me" for 172.18.0.1 at 2025-08-02 07:33:28 +0000
+Started GET "/api/v1/products" for 172.18.0.1 at 2025-08-02 07:33:28 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 2, 3, 4, 5)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (1, 2, 3, 4, 5, 6)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 2 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mActiveStorage::Attachment Load (0.9ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 3 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mActiveStorage::Attachment Load (0.9ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 4 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 1.8ms | Allocations: 1370)
+
+
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 5 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 6 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 27ms (Views: 0.2ms | ActiveRecord: 5.4ms | Allocations: 8967)
+
+
+Started GET "/api/v1/products" for 172.18.0.1 at 2025-08-02 07:33:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/auth/me" for 172.18.0.1 at 2025-08-02 07:33:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 1244)
+
+
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 2, 3, 4, 5)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.6ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (1, 2, 3, 4, 5, 6)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 2 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 3 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 4 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 5 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 6 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 29ms (Views: 0.3ms | ActiveRecord: 6.9ms | Allocations: 8219)
+
+
+Started GET "/api/v1/orders" for 172.18.0.1 at 2025-08-02 07:33:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/orders/seller_orders" for 172.18.0.1 at 2025-08-02 07:33:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::OrdersController#index as HTML
+Processing by Api::V1::OrdersController#seller_orders as HTML
+Started GET "/api/v1/reviews/user_reviews" for 172.18.0.1 at 2025-08-02 07:33:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+Started GET "/api/v1/wishlist" for 172.18.0.1 at 2025-08-02 07:33:32 +0000
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::WishlistController#index as HTML
+  [1m[36mProduct Pluck (6.0ms)[0m  [1m[34mSELECT `products`.`id` FROM `products` WHERE `products`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/orders_controller.rb:172:in `seller_orders'
+Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 8.7ms | Allocations: 5352)
+
+
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  [1m[36mOrder Load (3.5ms)[0m  [1m[34mSELECT `orders`.* FROM `orders` WHERE `orders`.`user_id` = 7[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  ↳ app/controllers/api/v1/orders_controller.rb:13:in `index'
+Completed 200 OK in 31ms (Views: 0.4ms | ActiveRecord: 5.7ms | Allocations: 8496)
+
+
+  [1m[36mWishlistItem Load (1.1ms)[0m  [1m[34mSELECT `wishlist_items`.* FROM `wishlist_items` WHERE `wishlist_items`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/wishlist_controller.rb:12:in `index'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 3.1ms | Allocations: 3606)
+
+
+Processing by Api::V1::ReviewsController#user_reviews as HTML
+Started GET "/api/v1/orders" for 172.18.0.1 at 2025-08-02 07:33:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mReview Load (0.7ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/reviews_controller.rb:111:in `user_reviews'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 2463)
+
+
+Processing by Api::V1::OrdersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 7 LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:16:in `authenticate_user'
+  [1m[36mOrder Load (0.5ms)[0m  [1m[34mSELECT `orders`.* FROM `orders` WHERE `orders`.`user_id` = 7[0m
+  ↳ app/controllers/api/v1/orders_controller.rb:13:in `index'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.9ms | Allocations: 1150)
+
+

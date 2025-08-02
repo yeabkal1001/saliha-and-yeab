@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarTrigger } from '../components/AppSidebar';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useOrders } from '../contexts/OrderContext';
