@@ -1,215 +1,180 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { authAPI } from '@/lib/api';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import api from '../lib/api';
 
-export interface User {
+interface User {
   id: string;
   name: string;
   email: string;
-  phone?: string;
-  address?: string;
-  bio?: string;
-  storeName?: string;
-  avatar?: string;
-  joinedDate?: Date;
+  role: 'user' | 'admin';
+  store_name?: string;
 }
 
 interface AuthContextType {
   user: User | null;
-  isAuthenticated: boolean;
   loading: boolean;
-  error: string | null;
   login: (email: string, password: string) => Promise<boolean>;
-  register: (userData: RegisterData) => Promise<boolean>;
+  register: (name: string, email: string, password: string, store_name?: string) => Promise<boolean>;
   logout: () => void;
-  updateProfile: (userData: Partial<User>) => void;
-  refreshUser: () => void;
-  clearError: () => void;
+  updateProfile: (data: Partial<User>) => Promise<boolean>;
 }
 
-interface RegisterData {
-  name: string;
-  email: string;
-  password: string;
-  storeName?: string;
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+interface AuthProviderProps {
+  children: ReactNode;
 }
 
-const AuthContext = createContext<AuthContextType | null>(null);
-
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  // Simplified authentication check - NO ASYNC OPERATIONS
+  // Check for existing authentication on app start
   useEffect(() => {
-    console.log('🔍 AuthContext: Checking localStorage for existing auth...');
-    
-    const token = localStorage.getItem('authToken');
-    const userStr = localStorage.getItem('user');
-    
-    if (token && userStr) {
+    const initializeAuth = async () => {
       try {
-        const userData = JSON.parse(userStr);
-        console.log('✅ AuthContext: Found existing user data:', userData);
-        setUser(userData);
-      } catch (err) {
-        console.error('❌ AuthContext: Failed to parse user data:', err);
+        const token = localStorage.getItem('authToken');
+        if (token) {
+          // Verify token with backend
+          const response = await api.get('/auth/me');
+          if (response.data.user) {
+            setUser(response.data.user);
+          } else {
+            // Invalid token, clear storage
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('user');
+          }
+        }
+      } catch (error) {
+        // Token is invalid or expired, clear storage
         localStorage.removeItem('authToken');
         localStorage.removeItem('user');
-        setUser(null);
+      } finally {
+        setLoading(false);
       }
-    } else {
-      console.log('❌ AuthContext: No existing auth found - continuing without auth');
-      setUser(null);
-    }
-    
-    // Set loading to false immediately
-    setLoading(false);
-  }, []); // Empty dependency array to prevent infinite loops
+    };
+
+    initializeAuth();
+  }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       setLoading(true);
-      setError(null);
-      const response = await authAPI.signIn({ email, password });
+      const response = await api.post('/auth/signin', { email, password });
+      
       const { token, user: userData } = response.data;
       
+      // Store token securely
       localStorage.setItem('authToken', token);
-      // Convert backend snake_case to frontend camelCase
-      const convertedUser = {
-        ...userData,
-        storeName: userData.store_name,
-        id: userData.id.toString()
-      };
-      localStorage.setItem('user', JSON.stringify(convertedUser));
-      setUser(convertedUser);
+      
+      // Update API headers
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      // Set user data (without sensitive information)
+      setUser({
+        id: userData.id,
+        name: userData.name,
+        email: userData.email,
+        role: userData.role,
+        store_name: userData.store_name
+      });
+      
       return true;
-    } catch (err: unknown) {
-      console.error('Login failed:', err);
-      const errorMessage = err instanceof Error ? err.message : 'Login failed. Please check your credentials.';
-      setError(errorMessage);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      console.error('Login failed:', errorMessage);
       return false;
     } finally {
       setLoading(false);
     }
   };
 
-  const register = async (userData: RegisterData): Promise<boolean> => {
+  const register = async (name: string, email: string, password: string, store_name?: string): Promise<boolean> => {
     try {
       setLoading(true);
-      setError(null);
-      const response = await authAPI.signUp(userData);
-      const { token, user: newUser } = response.data;
+      const response = await api.post('/auth/signup', { 
+        name, 
+        email, 
+        password, 
+        store_name 
+      });
       
+      const { token, user: userData } = response.data;
+      
+      // Store token securely
       localStorage.setItem('authToken', token);
-      // Convert backend snake_case to frontend camelCase
-      const convertedUser = {
-        ...newUser,
-        storeName: newUser.store_name,
-        id: newUser.id.toString()
-      };
-      localStorage.setItem('user', JSON.stringify(convertedUser));
-      setUser(convertedUser);
+      
+      // Update API headers
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      // Set user data
+      setUser({
+        id: userData.id,
+        name: userData.name,
+        email: userData.email,
+        role: userData.role,
+        store_name: userData.store_name
+      });
+      
       return true;
-    } catch (err: unknown) {
-      console.error('Registration failed:', err);
-      const errorMessage = err instanceof Error ? err.message : 'Registration failed. Please try again.';
-      setError(errorMessage);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      console.error('Registration failed:', errorMessage);
       return false;
     } finally {
       setLoading(false);
     }
   };
 
-  const logout = async () => {
-    try {
-      await authAPI.signOut();
-    } catch (err) {
-      console.error('Logout error:', err);
-    } finally {
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('user');
-      setUser(null);
-      setError(null);
-    }
+  const logout = () => {
+    // Clear all authentication data
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
+    
+    // Remove API authorization header
+    delete api.defaults.headers.common['Authorization'];
+    
+    // Clear user state
+    setUser(null);
   };
 
-  const updateProfile = async (userData: Partial<User>) => {
-    if (!user) return;
-    
+  const updateProfile = async (data: Partial<User>): Promise<boolean> => {
     try {
-      // Note: You'll need to add an update profile endpoint to your API
-      // const response = await authAPI.updateProfile(userData);
-      // setUser(response.data);
+      setLoading(true);
+      const response = await api.put('/auth/profile', data);
       
-      // For now, just update local state
-      const updatedUser = { ...user, ...userData };
-      setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-    } catch (err) {
-      console.error('Profile update failed:', err);
-      setError('Failed to update profile. Please try again.');
+      // Update user state with new data
+      setUser(prev => prev ? { ...prev, ...response.data.user } : null);
+      
+      return true;
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      console.error('Profile update failed:', errorMessage);
+      return false;
+    } finally {
+      setLoading(false);
     }
   };
 
-  const refreshUser = async () => {
-    if (!user) return;
-    
-    try {
-      const response = await authAPI.getCurrentUser();
-      const userData = response.data.user;
-      const convertedUser = {
-        ...userData,
-        storeName: userData.store_name,
-        id: userData.id.toString()
-      };
-      setUser(convertedUser);
-      localStorage.setItem('user', JSON.stringify(convertedUser));
-    } catch (err) {
-      console.error('Failed to refresh user:', err);
-      // If refresh fails, user might be logged out
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('user');
-      setUser(null);
-    }
+  const value: AuthContextType = {
+    user,
+    loading,
+    login,
+    register,
+    logout,
+    updateProfile
   };
-
-  const clearError = () => {
-    setError(null);
-  };
-
-  // Compute isAuthenticated based on both user and token
-  const isAuthenticated = !!user && !!localStorage.getItem('authToken');
-
-  console.log('🔐 AuthContext state:', { 
-    user: !!user, 
-    token: !!localStorage.getItem('authToken'), 
-    isAuthenticated, 
-    loading 
-  });
 
   return (
-    <AuthContext.Provider value={{
-      user,
-      isAuthenticated,
-      loading,
-      error,
-      login,
-      register,
-      logout,
-      updateProfile,
-      refreshUser,
-      clearError
-    }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
-  }
-  return context;
 };

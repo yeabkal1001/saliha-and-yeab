@@ -1,36 +1,28 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const token = localStorage.getItem('authToken');
-  const userStr = localStorage.getItem('user');
+  const { user, loading } = useAuth();
 
-  // Check if both token and user data exist
-  if (!token || !userStr) {
-    console.log('🔒 ProtectedRoute: No auth found, redirecting to signin');
+  // Show loading spinner while checking authentication
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  // Redirect to sign-in if not authenticated
+  if (!user) {
     return <Navigate to="/signin" replace />;
   }
 
-  // Validate user data
-  try {
-    const user = JSON.parse(userStr);
-    if (!user.id || !user.email) {
-      console.log('🔒 ProtectedRoute: Invalid user data, redirecting to signin');
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('user');
-      return <Navigate to="/signin" replace />;
-    }
-  } catch (error) {
-    console.log('🔒 ProtectedRoute: Failed to parse user data, redirecting to signin');
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
-    return <Navigate to="/signin" replace />;
-  }
-
-  console.log('🔒 ProtectedRoute: Auth valid, rendering protected content');
+  // Render protected content if authenticated
   return <>{children}</>;
 };
