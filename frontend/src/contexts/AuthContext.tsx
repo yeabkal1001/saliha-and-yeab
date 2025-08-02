@@ -40,46 +40,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Check for existing auth token on mount
+  // Simplified authentication check - NO ASYNC OPERATIONS
   useEffect(() => {
-    const checkAuth = async () => {
-      console.log('🔍 Checking authentication...');
-      const token = localStorage.getItem('authToken');
-      console.log('Token exists:', !!token);
-      
-      if (token) {
-        try {
-          console.log('🔄 Fetching current user...');
-          const response = await authAPI.getCurrentUser();
-          const userData = response.data.user;
-          console.log('✅ User data received:', userData);
-          
-          // Convert backend snake_case to frontend camelCase
-          const convertedUser = {
-            ...userData,
-            storeName: userData.store_name,
-            id: userData.id.toString()
-          };
-          console.log('✅ Setting user:', convertedUser);
-          setUser(convertedUser);
-        } catch (err) {
-          console.error('❌ Failed to get current user:', err);
-          localStorage.removeItem('authToken');
-          setUser(null);
-        }
-      } else {
-        console.log('❌ No token found, user not authenticated');
+    console.log('🔍 AuthContext: Checking localStorage for existing auth...');
+    
+    const token = localStorage.getItem('authToken');
+    const userStr = localStorage.getItem('user');
+    
+    if (token && userStr) {
+      try {
+        const userData = JSON.parse(userStr);
+        console.log('✅ AuthContext: Found existing user data:', userData);
+        setUser(userData);
+      } catch (err) {
+        console.error('❌ AuthContext: Failed to parse user data:', err);
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('user');
         setUser(null);
       }
-      
-      // Add a small delay to prevent rapid re-renders
-      setTimeout(() => {
-        console.log('🏁 Setting loading to false');
-        setLoading(false);
-      }, 100);
-    };
-
-    checkAuth();
+    } else {
+      console.log('❌ AuthContext: No existing auth found');
+      setUser(null);
+    }
+    
+    // Set loading to false immediately
+    setLoading(false);
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
@@ -91,11 +76,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       localStorage.setItem('authToken', token);
       // Convert backend snake_case to frontend camelCase
-      setUser({
+      const convertedUser = {
         ...userData,
         storeName: userData.store_name,
         id: userData.id.toString()
-      });
+      };
+      localStorage.setItem('user', JSON.stringify(convertedUser));
+      setUser(convertedUser);
       return true;
     } catch (err: any) {
       console.error('Login failed:', err);
@@ -116,11 +103,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       localStorage.setItem('authToken', token);
       // Convert backend snake_case to frontend camelCase
-      setUser({
+      const convertedUser = {
         ...newUser,
         storeName: newUser.store_name,
         id: newUser.id.toString()
-      });
+      };
+      localStorage.setItem('user', JSON.stringify(convertedUser));
+      setUser(convertedUser);
       return true;
     } catch (err: any) {
       console.error('Registration failed:', err);
@@ -139,6 +128,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.error('Logout error:', err);
     } finally {
       localStorage.removeItem('authToken');
+      localStorage.removeItem('user');
       setUser(null);
       setError(null);
     }
@@ -153,7 +143,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // setUser(response.data);
       
       // For now, just update local state
-      setUser({ ...user, ...userData });
+      const updatedUser = { ...user, ...userData };
+      setUser(updatedUser);
+      localStorage.setItem('user', JSON.stringify(updatedUser));
     } catch (err) {
       console.error('Profile update failed:', err);
       setError('Failed to update profile. Please try again.');
@@ -165,11 +157,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     try {
       const response = await authAPI.getCurrentUser();
-      setUser(response.data);
+      const userData = response.data.user;
+      const convertedUser = {
+        ...userData,
+        storeName: userData.store_name,
+        id: userData.id.toString()
+      };
+      setUser(convertedUser);
+      localStorage.setItem('user', JSON.stringify(convertedUser));
     } catch (err) {
       console.error('Failed to refresh user:', err);
       // If refresh fails, user might be logged out
       localStorage.removeItem('authToken');
+      localStorage.removeItem('user');
       setUser(null);
     }
   };
