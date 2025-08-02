@@ -75,7 +75,7 @@ export const ordersAPI = {
 // API endpoints for authentication
 export const authAPI = {
   signIn: (credentials: { email: string; password: string }) => 
-    api.post('/api/v1/auth/signin', credentials),
+    api.post('/api/v1/auth/signin', { user: credentials }),
   signUp: (userData: { email: string; password: string; name: string; storeName?: string }) => {
     // Convert camelCase to snake_case for backend
     const backendData = {

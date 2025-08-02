@@ -1,4 +1,4 @@
-class Api::V1::AdminController < ApplicationController
+class Api::V1::Admin::AdminController < ApplicationController
   before_action :authenticate_user
   before_action :ensure_admin
 
