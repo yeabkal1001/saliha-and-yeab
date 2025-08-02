@@ -2,6 +2,11 @@
 
 A modern, production-ready e-commerce platform built with React (frontend) and Ruby on Rails (backend).
 
+## 👥 Team Members
+
+- **Yeab Kalayu** (Backend Developer) - `yeabsira.kayel@bitscollege.edu.et`
+- **Saliha Abdo** (Frontend Developer) - `saloooalfakiii13@gmail.com`
+
 ## 🚀 Features
 
 ### Frontend (React + TypeScript)
@@ -18,36 +23,39 @@ A modern, production-ready e-commerce platform built with React (frontend) and R
 ### Backend (Ruby on Rails API)
 - **RESTful API** - Clean, well-documented endpoints
 - **PostgreSQL Database** - Robust data storage
-- **JWT Authentication** - Secure user sessions
-- **Active Storage** - File uploads and image management
-- **CORS Support** - Cross-origin resource sharing
-- **Database Seeding** - Sample data for testing
+- **JWT Authentication** - Secure user authentication
+- **Active Storage** - File upload and management
+- **CORS Configuration** - Cross-origin resource sharing
+- **Data Validation** - Comprehensive input validation
+- **Error Handling** - Proper error responses
 
 ## 🛠️ Tech Stack
 
 ### Frontend
 - **React 18** - Modern React with hooks
-- **TypeScript** - Type-safe development
+- **TypeScript** - Type-safe JavaScript
 - **Vite** - Fast build tool and dev server
 - **Tailwind CSS** - Utility-first CSS framework
 - **Radix UI** - Accessible component primitives
 - **React Router** - Client-side routing
-- **React Query** - Server state management
-- **Framer Motion** - Smooth animations
+- **React Query** - Data fetching and caching
+- **Framer Motion** - Animation library
 - **Axios** - HTTP client
 
 ### Backend
 - **Ruby on Rails 7** - API-only mode
 - **PostgreSQL** - Primary database
 - **JWT** - JSON Web Tokens for authentication
-- **Active Storage** - File uploads
-- **CORS** - Cross-origin support
-- **Puma** - Web server
+- **Active Storage** - File attachment framework
+- **CORS** - Cross-origin resource sharing
+- **Rack CORS** - CORS middleware
 
-### DevOps
+### DevOps & Deployment
 - **Docker** - Containerization
-- **Nginx** - Reverse proxy and static file serving
 - **Docker Compose** - Multi-container orchestration
+- **Nginx** - Reverse proxy and static file serving
+- **PostgreSQL** - Production database
+- **Redis** - Caching and session storage
 
 ## 📦 Installation
 
@@ -55,9 +63,9 @@ A modern, production-ready e-commerce platform built with React (frontend) and R
 - Node.js 18+ and npm
 - Ruby 3.4+ and Bundler
 - PostgreSQL
-- Docker (optional, for production)
+- Docker (optional, for containerized deployment)
 
-### Development Setup
+### Manual Installation
 
 1. **Clone the repository**
    ```bash
@@ -84,40 +92,61 @@ A modern, production-ready e-commerce platform built with React (frontend) and R
    - Frontend: http://localhost:3002
    - Backend API: http://localhost:3000
 
-## 🔐 Test Credentials
+## 🚀 Production Deployment
 
-### Admin User
-- Email: `admin@example.com`
-- Password: `admin123`
+### Docker Deployment (Recommended)
 
-### Sample Users
-- Email: `john.doe@example.com` / Password: `password123`
-- Email: `sarah@example.com` / Password: `password123`
-- Email: `mike@example.com` / Password: `password123`
-- Email: `emma@example.com` / Password: `password123`
+1. **Build and deploy**
+   ```bash
+   ./deploy.sh build
+   ./deploy.sh deploy
+   ```
 
-## 🐳 Production Deployment
+2. **Access production**
+   - Application: http://your-domain.com
+   - API: http://your-domain.com/api
 
-### Using Docker Compose
+### Manual Production Setup
+
+1. **Environment Configuration**
+   ```bash
+   # Backend
+   export DATABASE_URL="postgresql://user:password@localhost/shop_ease_production"
+   export JWT_SECRET="your-secret-key"
+   
+   # Frontend
+   export VITE_API_URL="http://your-api-domain.com"
+   ```
+
+2. **Database Setup**
+   ```bash
+   cd backend
+   RAILS_ENV=production bundle exec rails db:create db:migrate db:seed
+   ```
+
+3. **Build Frontend**
+   ```bash
+   cd frontend
+   npm run build:prod
+   ```
+
+## 🧪 Development Scripts
+
+### Frontend
 ```bash
-# Build and start all services
-docker-compose -f docker-compose.prod.yml up -d
-
-# Run database migrations
-docker-compose -f docker-compose.prod.yml exec backend rails db:migrate
-
-# Check service status
-docker-compose -f docker-compose.prod.yml ps
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run build:prod   # Production build with optimizations
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues
 ```
 
-### Manual Deployment
+### Backend
 ```bash
-# Use the deployment script
-./deploy.sh
-
-# Or deploy manually
-cd frontend && npm run build
-cd ../backend && bundle exec rails assets:precompile
+bundle exec rails server     # Start development server
+bundle exec rails console    # Rails console
+bundle exec rails routes     # List all routes
+bundle exec rails db:reset   # Reset database
 ```
 
 ## 📁 Project Structure
@@ -127,59 +156,65 @@ yeab-saliha/
 ├── frontend/                 # React frontend application
 │   ├── src/
 │   │   ├── components/      # Reusable UI components
-│   │   ├── contexts/        # React contexts
+│   │   ├── contexts/        # React contexts for state management
 │   │   ├── hooks/          # Custom React hooks
-│   │   ├── lib/            # Utility functions
+│   │   ├── lib/            # Utility functions and API config
 │   │   ├── pages/          # Page components
-│   │   └── types/          # TypeScript type definitions
+│   │   └── main.tsx        # Application entry point
 │   ├── public/             # Static assets
 │   └── package.json        # Frontend dependencies
 ├── backend/                # Rails API backend
 │   ├── app/
 │   │   ├── controllers/    # API controllers
 │   │   ├── models/         # ActiveRecord models
-│   │   └── serializers/    # JSON serializers
+│   │   └── assets/         # Backend assets
 │   ├── config/             # Rails configuration
 │   ├── db/                 # Database migrations and seeds
 │   └── Gemfile             # Ruby dependencies
+├── docker-compose.yml      # Development Docker setup
 ├── docker-compose.prod.yml # Production Docker setup
-├── nginx.conf              # Nginx configuration
-├── deploy.sh               # Deployment script
-└── README.md               # This file
+├── deploy.sh              # Deployment script
+└── README.md              # Project documentation
 ```
 
-## 🔧 Development Scripts
+## 🔐 Security Features
 
-### Frontend
+- **JWT Authentication** - Secure token-based authentication
+- **CORS Configuration** - Controlled cross-origin access
+- **Input Validation** - Comprehensive data validation
+- **SQL Injection Protection** - ActiveRecord ORM protection
+- **XSS Protection** - React's built-in XSS protection
+- **CSRF Protection** - Rails CSRF token protection
+
+## 📊 Performance Optimizations
+
+- **Code Splitting** - Dynamic imports for better loading
+- **Image Optimization** - Compressed and optimized images
+- **Caching** - React Query for API response caching
+- **Bundle Optimization** - Tree shaking and minification
+- **Database Indexing** - Optimized database queries
+- **CDN Ready** - Static asset optimization
+
+## 🧪 Testing
+
+### Frontend Testing
 ```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
-npm run lint         # Run ESLint
-npm run lint:fix     # Fix ESLint errors
+npm run test        # Run unit tests
+npm run test:e2e    # Run end-to-end tests
 ```
 
-### Backend
+### Backend Testing
 ```bash
-rails server         # Start development server
-rails console        # Start Rails console
-rails db:migrate     # Run database migrations
-rails db:seed        # Seed database with sample data
-rails routes         # List all routes
+bundle exec rspec   # Run RSpec tests
+bundle exec rails test  # Run Rails tests
 ```
 
-## 🌟 Key Features Implemented
+## 📈 Monitoring & Logging
 
-- ✅ **Real-time Product Management** - Add, edit, delete products
-- ✅ **User Authentication** - Secure login/signup with JWT
-- ✅ **Shopping Cart** - Add items, update quantities, checkout
-- ✅ **Order Processing** - Complete order lifecycle
-- ✅ **Seller Dashboard** - Manage listings and track sales
-- ✅ **Search & Filtering** - Find products by category, price, etc.
-- ✅ **Reviews & Ratings** - User-generated product reviews
-- ✅ **Wishlist** - Save favorite products
-- ✅ **Responsive Design** - Mobile-first approach
-- ✅ **Production Ready** - Docker, Nginx, security headers
+- **Application Logs** - Rails and React logging
+- **Error Tracking** - Comprehensive error handling
+- **Performance Monitoring** - Response time tracking
+- **Database Monitoring** - Query performance analysis
 
 ## 🤝 Contributing
 
@@ -189,22 +224,19 @@ rails routes         # List all routes
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
+## 📞 Support
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+For support and questions:
+- **Backend Issues**: Contact Yeab Kalayu (`yeabsira.kayel@bitscollege.edu.et`)
+- **Frontend Issues**: Contact Saliha Abdo (`saloooalfakiii13@gmail.com`)
 
-## 👥 Authors
+## 🔄 Updates & Maintenance
 
-- **Yeab** - Backend development
-- **Saliha** - Frontend development
-
-## 🙏 Acknowledgments
-
-- React and Rails communities
-- Tailwind CSS for the amazing styling framework
-- Radix UI for accessible components
-- All contributors and testers
+- Regular security updates
+- Performance optimizations
+- Feature enhancements
+- Bug fixes and improvements
 
 ---
 
-**Happy Shopping! 🛍️** 
+**Built with ❤️ by Yeab Kalayu & Saliha Abdo** 
