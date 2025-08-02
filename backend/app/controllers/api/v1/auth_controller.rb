@@ -66,6 +66,25 @@ class Api::V1::AuthController < ApplicationController
     }
   end
 
+  def profile
+    require_authentication
+    return if performed? # Stop execution if authentication failed
+    
+    if @current_user.update(profile_params)
+      render json: {
+        user: {
+          id: @current_user.id,
+          name: @current_user.name,
+          email: @current_user.email,
+          store_name: @current_user.store_name,
+          role: @current_user.admin? ? 'admin' : 'user'
+        }
+      }
+    else
+      render json: { errors: @current_user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
@@ -79,6 +98,11 @@ class Api::V1::AuthController < ApplicationController
     end
     
     user_params_raw
+  end
+
+  def profile_params
+    # Allow updating name, email, and store_name
+    params.permit(:name, :email, :store_name)
   end
 
   def generate_token(user_id)

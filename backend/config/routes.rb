@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post 'auth/signin', to: 'auth#signin'
       delete 'auth/signout', to: 'auth#signout'
       get 'auth/me', to: 'auth#me'
+      put 'auth/profile', to: 'auth#profile'
       
       # Product routes
       resources :products do
