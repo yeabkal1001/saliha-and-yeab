@@ -11,10 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2025_08_02_075156) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -24,7 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_02_075156) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -36,13 +33,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_02_075156) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "order_items", force: :cascade do |t|
+  create_table "order_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "quantity", null: false
     t.decimal "price", precision: 10, scale: 2, null: false
     t.bigint "order_id", null: false
@@ -53,7 +50,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_02_075156) do
     t.index ["product_id"], name: "index_order_items_on_product_id"
   end
 
-  create_table "orders", force: :cascade do |t|
+  create_table "orders", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "status", default: "pending", null: false
     t.decimal "total_amount", precision: 10, scale: 2, null: false
     t.string "shipping_address"
@@ -65,14 +62,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_02_075156) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "products", force: :cascade do |t|
+  create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
     t.decimal "price", precision: 10, scale: 2, null: false
@@ -87,7 +84,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_02_075156) do
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
-  create_table "reviews", force: :cascade do |t|
+  create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "rating", null: false
     t.text "comment", null: false
     t.bigint "user_id", null: false
@@ -99,7 +96,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_02_075156) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -110,7 +107,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_02_075156) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "wishlist_items", force: :cascade do |t|
+  create_table "wishlist_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", null: false
