@@ -69,7 +69,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
-  const { addNotification } = useNotifications();
+  const { addNotification, refreshNotifications } = useNotifications();
   const { user } = useAuth();
 
   // Fetch products from API
@@ -256,6 +256,9 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       
       setOrders(prev => [newOrder, ...prev]);
       clearCart();
+      
+      // Refresh notifications to show new seller notifications
+      refreshNotifications();
       
       addNotification({
         type: 'message',

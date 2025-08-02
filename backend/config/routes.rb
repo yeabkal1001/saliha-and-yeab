@@ -54,6 +54,17 @@ Rails.application.routes.draw do
       # Legacy posts routes (keeping for compatibility)
       resources :posts, only: [:index, :create, :show, :update, :destroy]
       
+      # Notification routes
+      resources :notifications, only: [:index, :destroy] do
+        collection do
+          patch :mark_all_as_read
+          delete :clear_all
+        end
+        member do
+          patch :mark_as_read
+        end
+      end
+      
       # Admin routes
       namespace :admin do
         get 'dashboard', to: 'admin#dashboard'

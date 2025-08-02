@@ -23,9 +23,9 @@ class Api::V1::AuthController < ApplicationController
   end
 
   def signin
-    user = User.find_by(email: params[:email])
+    user = User.find_by(email: params[:user][:email])
     
-    if user&.authenticate(params[:password])
+    if user&.authenticate(params[:user][:password])
       token = generate_token(user.id)
       render json: {
         user: {
