@@ -1,307 +1,210 @@
-# Yeab-Saliha E-commerce Platform
+# 🛍️ ShopEase - Full-Stack E-commerce Application
 
-A full-stack e-commerce platform built with React (TypeScript) frontend and Ruby on Rails backend.
+A modern, production-ready e-commerce platform built with React (frontend) and Ruby on Rails (backend).
 
 ## 🚀 Features
 
-- **User Authentication**: Secure signup/login with JWT tokens
-- **Product Management**: Add, edit, and manage products with images
-- **Shopping Cart**: Add/remove items with quantity management
-- **Order Management**: Complete order lifecycle for buyers and sellers
-- **Wishlist**: Save favorite products
-- **Search & Filtering**: Advanced product search and filtering
-- **Responsive Design**: Mobile-first responsive UI
-- **Real-time Updates**: Live order status updates
-- **Admin Dashboard**: Seller analytics and management tools
+### Frontend (React + TypeScript)
+- **Modern UI/UX** - Built with Tailwind CSS and Radix UI components
+- **Authentication** - JWT-based login/signup system
+- **Product Management** - Browse, search, and manage products
+- **Shopping Cart** - Add/remove items with real-time updates
+- **Order Management** - Complete order lifecycle
+- **Seller Dashboard** - Manage listings and track sales
+- **Wishlist** - Save favorite products
+- **Reviews & Ratings** - User-generated content
+- **Responsive Design** - Works on all devices
 
-## 🛠 Tech Stack
+### Backend (Ruby on Rails API)
+- **RESTful API** - Clean, well-documented endpoints
+- **PostgreSQL Database** - Robust data storage
+- **JWT Authentication** - Secure user sessions
+- **Active Storage** - File uploads and image management
+- **CORS Support** - Cross-origin resource sharing
+- **Database Seeding** - Sample data for testing
+
+## 🛠️ Tech Stack
 
 ### Frontend
-- **React 18** with TypeScript
-- **Vite** for fast development and optimized builds
-- **Tailwind CSS** for styling
-- **Radix UI** for accessible components
-- **React Router** for navigation
-- **React Query** for data fetching
-- **Framer Motion** for animations
-- **Axios** for API communication
+- **React 18** - Modern React with hooks
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **Radix UI** - Accessible component primitives
+- **React Router** - Client-side routing
+- **React Query** - Server state management
+- **Framer Motion** - Smooth animations
+- **Axios** - HTTP client
 
 ### Backend
-- **Ruby on Rails 7** with API mode
-- **PostgreSQL** database
-- **JWT** authentication
-- **Active Storage** for file uploads
-- **CORS** enabled for cross-origin requests
+- **Ruby on Rails 7** - API-only mode
+- **PostgreSQL** - Primary database
+- **JWT** - JSON Web Tokens for authentication
+- **Active Storage** - File uploads
+- **CORS** - Cross-origin support
+- **Puma** - Web server
+
+### DevOps
+- **Docker** - Containerization
+- **Nginx** - Reverse proxy and static file serving
+- **Docker Compose** - Multi-container orchestration
 
 ## 📦 Installation
 
 ### Prerequisites
 - Node.js 18+ and npm
-- Ruby 3.2+ and Rails 7
+- Ruby 3.4+ and Bundler
 - PostgreSQL
+- Docker (optional, for production)
 
-### Backend Setup
+### Development Setup
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd yeab-saliha/backend
+   git clone https://github.com/yeabkal1001/saliha-and-yeab.git
+   cd saliha-and-yeab
    ```
 
-2. **Install dependencies**
+2. **Backend Setup**
    ```bash
+   cd backend
    bundle install
-   ```
-
-3. **Database setup**
-   ```bash
-   rails db:create
-   rails db:migrate
-   rails db:seed
-   ```
-
-4. **Start the server**
-   ```bash
+   rails db:create db:migrate db:seed
    rails server -p 3000
    ```
 
-### Frontend Setup
-
-1. **Navigate to frontend directory**
+3. **Frontend Setup**
    ```bash
-   cd ../frontend
-   ```
-
-2. **Install dependencies**
-   ```bash
+   cd frontend
    npm install
-   ```
-
-3. **Environment configuration**
-   Create a `.env` file:
-   ```env
-   VITE_API_URL=http://localhost:3000
-   ```
-
-4. **Start development server**
-   ```bash
    npm run dev
    ```
 
-## 🚀 Production Deployment
+4. **Access the application**
+   - Frontend: http://localhost:3002
+   - Backend API: http://localhost:3000
 
-### Environment Variables
+## 🔐 Test Credentials
 
-Create production environment files:
+### Admin User
+- Email: `admin@example.com`
+- Password: `admin123`
 
-**Backend (.env)**
-```env
-RAILS_ENV=production
-DATABASE_URL=postgresql://username:password@localhost/database_name
-SECRET_KEY_BASE=your_secret_key_base
-JWT_SECRET_KEY=your_jwt_secret
+### Sample Users
+- Email: `john.doe@example.com` / Password: `password123`
+- Email: `sarah@example.com` / Password: `password123`
+- Email: `mike@example.com` / Password: `password123`
+- Email: `emma@example.com` / Password: `password123`
+
+## 🐳 Production Deployment
+
+### Using Docker Compose
+```bash
+# Build and start all services
+docker-compose -f docker-compose.prod.yml up -d
+
+# Run database migrations
+docker-compose -f docker-compose.prod.yml exec backend rails db:migrate
+
+# Check service status
+docker-compose -f docker-compose.prod.yml ps
 ```
 
-**Frontend (.env.production)**
-```env
-VITE_API_URL=https://your-production-api-domain.com
+### Manual Deployment
+```bash
+# Use the deployment script
+./deploy.sh
+
+# Or deploy manually
+cd frontend && npm run build
+cd ../backend && bundle exec rails assets:precompile
 ```
-
-### Build for Production
-
-1. **Backend**
-   ```bash
-   cd backend
-   RAILS_ENV=production bundle install
-   RAILS_ENV=production rails db:migrate
-   RAILS_ENV=production rails assets:precompile
-   ```
-
-2. **Frontend**
-   ```bash
-   cd frontend
-   npm run build:prod
-   ```
-
-### Deployment Options
-
-#### Option 1: Docker (Recommended)
-
-1. **Build and run with Docker Compose**
-   ```bash
-   docker-compose -f docker-compose.prod.yml up -d
-   ```
-
-#### Option 2: Manual Deployment
-
-1. **Backend (using Passenger/Nginx)**
-   ```bash
-   # Install Passenger
-   gem install passenger
-   passenger-install-nginx-module
-   
-   # Configure Nginx
-   sudo nano /etc/nginx/sites-available/your-app
-   sudo ln -s /etc/nginx/sites-available/your-app /etc/nginx/sites-enabled/
-   sudo systemctl restart nginx
-   ```
-
-2. **Frontend (using Nginx)**
-   ```bash
-   # Copy built files
-   sudo cp -r frontend/dist/* /var/www/html/
-   
-   # Configure Nginx for SPA routing
-   sudo nano /etc/nginx/sites-available/frontend
-   ```
-
-## 🔧 Development
-
-### Available Scripts
-
-**Frontend**
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run build:prod` - Build with production optimizations
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint errors
-- `npm run typecheck` - Run TypeScript type checking
-- `npm run preview` - Preview production build
-
-**Backend**
-- `rails server` - Start development server
-- `rails console` - Open Rails console
-- `rails db:migrate` - Run database migrations
-- `rails db:seed` - Seed database with sample data
-- `rails test` - Run tests
-
-### Code Quality
-
-The project includes:
-- **ESLint** for JavaScript/TypeScript linting
-- **TypeScript** for type safety
-- **Prettier** for code formatting
-- **RuboCop** for Ruby code style
 
 ## 📁 Project Structure
 
 ```
 yeab-saliha/
-├── backend/                 # Rails API backend
-│   ├── app/
-│   │   ├── controllers/     # API controllers
-│   │   ├── models/         # ActiveRecord models
-│   │   └── assets/         # Static assets
-│   ├── config/             # Rails configuration
-│   ├── db/                 # Database migrations
-│   └── Dockerfile          # Backend Docker config
-├── frontend/               # React frontend
+├── frontend/                 # React frontend application
 │   ├── src/
-│   │   ├── components/     # Reusable components
-│   │   ├── contexts/       # React contexts
+│   │   ├── components/      # Reusable UI components
+│   │   ├── contexts/        # React contexts
+│   │   ├── hooks/          # Custom React hooks
+│   │   ├── lib/            # Utility functions
 │   │   ├── pages/          # Page components
-│   │   ├── hooks/          # Custom hooks
-│   │   └── lib/            # Utilities and API
+│   │   └── types/          # TypeScript type definitions
 │   ├── public/             # Static assets
-│   └── Dockerfile          # Frontend Docker config
-└── docker-compose.yml      # Development Docker setup
+│   └── package.json        # Frontend dependencies
+├── backend/                # Rails API backend
+│   ├── app/
+│   │   ├── controllers/    # API controllers
+│   │   ├── models/         # ActiveRecord models
+│   │   └── serializers/    # JSON serializers
+│   ├── config/             # Rails configuration
+│   ├── db/                 # Database migrations and seeds
+│   └── Gemfile             # Ruby dependencies
+├── docker-compose.prod.yml # Production Docker setup
+├── nginx.conf              # Nginx configuration
+├── deploy.sh               # Deployment script
+└── README.md               # This file
 ```
 
-## 🔒 Security Features
-
-- JWT token-based authentication
-- CORS configuration
-- Input validation and sanitization
-- SQL injection prevention
-- XSS protection
-- CSRF protection
-
-## 📊 Performance Optimizations
+## 🔧 Development Scripts
 
 ### Frontend
-- Code splitting with dynamic imports
-- Lazy loading of components
-- Optimized bundle size with chunk splitting
-- Image optimization
-- Caching strategies
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint errors
+```
 
 ### Backend
-- Database query optimization
-- N+1 query prevention
-- Caching with Redis (optional)
-- Asset compression
-- CDN integration ready
-
-## 🧪 Testing
-
-### Frontend Testing
 ```bash
-npm run test
+rails server         # Start development server
+rails console        # Start Rails console
+rails db:migrate     # Run database migrations
+rails db:seed        # Seed database with sample data
+rails routes         # List all routes
 ```
 
-### Backend Testing
-```bash
-rails test
-```
+## 🌟 Key Features Implemented
 
-## 📈 Monitoring & Analytics
-
-- Error tracking with Sentry (configurable)
-- Performance monitoring
-- User analytics
-- Order tracking and notifications
+- ✅ **Real-time Product Management** - Add, edit, delete products
+- ✅ **User Authentication** - Secure login/signup with JWT
+- ✅ **Shopping Cart** - Add items, update quantities, checkout
+- ✅ **Order Processing** - Complete order lifecycle
+- ✅ **Seller Dashboard** - Manage listings and track sales
+- ✅ **Search & Filtering** - Find products by category, price, etc.
+- ✅ **Reviews & Ratings** - User-generated product reviews
+- ✅ **Wishlist** - Save favorite products
+- ✅ **Responsive Design** - Mobile-first approach
+- ✅ **Production Ready** - Docker, Nginx, security headers
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📄 License
+## 📝 License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
+## 👥 Authors
 
-For support and questions:
-- Create an issue in the repository
-- Contact the development team
-- Check the documentation
+- **Yeab** - Backend development
+- **Saliha** - Frontend development
 
-## 🔄 Updates
+## 🙏 Acknowledgments
 
-To update the application:
-
-1. **Pull latest changes**
-   ```bash
-   git pull origin main
-   ```
-
-2. **Update dependencies**
-   ```bash
-   # Frontend
-   cd frontend && npm install
-   
-   # Backend
-   cd backend && bundle install
-   ```
-
-3. **Run migrations**
-   ```bash
-   cd backend && rails db:migrate
-   ```
-
-4. **Rebuild and restart**
-   ```bash
-   # Frontend
-   cd frontend && npm run build:prod
-   
-   # Backend
-   cd backend && rails restart
-   ```
+- React and Rails communities
+- Tailwind CSS for the amazing styling framework
+- Radix UI for accessible components
+- All contributors and testers
 
 ---
 
-**Note**: Make sure to update environment variables and database configurations according to your production setup. 
+**Happy Shopping! 🛍️** 
