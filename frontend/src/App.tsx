@@ -35,6 +35,7 @@ import OrderManagement from './pages/OrderManagement';
 import SellerDashboard from './pages/SellerDashboard';
 import Search from './pages/Search';
 import Notifications from './pages/Notifications';
+import AdminDashboard from './pages/AdminDashboard';
 import NotFound from './pages/NotFound';
 
 // Create a client
@@ -85,6 +86,7 @@ const AppContent = () => {
                     <Route path="/seller-dashboard" element={<SellerDashboard />} />
                     <Route path="/search" element={<Search />} />
                     <Route path="/notifications" element={<Notifications />} />
+                    <Route path="/admin" element={<AdminDashboard />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </main>

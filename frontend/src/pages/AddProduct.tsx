@@ -25,7 +25,7 @@ const AddProduct = () => {
     description: '',
     price: '',
     category: '',
-    image: null as File | null,
+    image_url: '',
     stock: ''
   });
 
@@ -49,7 +49,7 @@ const AddProduct = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.title || !formData.description || !formData.price || !formData.category || !formData.image || !formData.stock) {
+    if (!formData.title || !formData.description || !formData.price || !formData.category || !formData.image_url || !formData.stock) {
       toast({
         title: "Error",
         description: "Please fill in all required fields.",
@@ -59,30 +59,15 @@ const AddProduct = () => {
     }
 
     try {
-      // Create FormData for the product
-      const productData = new FormData();
-      productData.append('product[title]', formData.title);
-      productData.append('product[description]', formData.description);
-      productData.append('product[price]', formData.price);
-      productData.append('product[category]', formData.category);
-      productData.append('product[stock_quantity]', formData.stock);
-      productData.append('product[image]', formData.image);
-
-      // Get auth token
-      const token = localStorage.getItem('authToken');
-      
-      // Send to backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/v1/products`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: productData
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to create product');
-      }
+      // Create product data
+      const productData = {
+        title: formData.title,
+        description: formData.description,
+        price: parseFloat(formData.price),
+        category: formData.category,
+        stock_quantity: parseInt(formData.stock),
+        image_url: formData.image_url
+      };
 
       toast({
         title: "Product added!",
@@ -190,11 +175,20 @@ const AddProduct = () => {
                     </Select>
                   </div>
 
-                  <ImageUpload
-                    value={formData.image}
-                    onChange={(value) => handleChange('image', typeof value === 'string' ? value : '')}
-                    label="Product Image *"
-                  />
+                  <div className="space-y-2">
+                    <Label htmlFor="image_url">Product Image URL *</Label>
+                    <Input
+                      id="image_url"
+                      type="url"
+                      value={formData.image_url}
+                      onChange={(e) => handleChange('image_url', e.target.value)}
+                      placeholder="https://example.com/image.jpg"
+                      required
+                    />
+                    <p className="text-xs text-gray-500">
+                      Tip: Use Unsplash URLs for high-quality product images
+                    </p>
+                  </div>
 
                   <Button
                     type="submit"

@@ -215,7 +215,11 @@ const Index = () => {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <Button size="lg" className="bg-white text-black hover:bg-gray-100">
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-black hover:bg-gray-100"
+                    onClick={() => window.location.href = '/products'}
+                  >
                     {banners[currentBannerIndex].cta}
                     <ArrowRight className="ml-2" size={20} />
                   </Button>

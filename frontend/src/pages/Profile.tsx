@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { SidebarTrigger } from '../components/AppSidebar';
 import { Button } from '@/components/ui/button';
@@ -8,30 +8,67 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '../hooks/use-toast';
+import { useAuth } from '../contexts/AuthContext';
+import { useProducts } from '../contexts/ProductContext';
 import { User, Mail, Phone, MapPin, Store, Save } from 'lucide-react';
 
 const Profile = () => {
   const { toast } = useToast();
+  const { user, updateProfile } = useAuth();
+  const { myListings, orders } = useProducts();
   const [formData, setFormData] = useState({
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    phone: '+1 (555) 123-4567',
-    address: '123 Main St, City, State 12345',
-    bio: 'Passionate seller with a focus on quality products and excellent customer service.',
-    storeName: 'Your Store',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400'
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    bio: '',
+    storeName: '',
+    avatar: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.name || '',
+        email: user.email || '',
+        phone: '',
+        address: '',
+        bio: '',
+        storeName: user.store_name || '',
+        avatar: ''
+      });
+    }
+  }, [user]);
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Profile updated!",
-      description: "Your profile information has been saved successfully.",
-    });
+    setIsLoading(true);
+    
+    try {
+      await updateProfile({
+        name: formData.name,
+        email: formData.email,
+        store_name: formData.storeName
+      });
+      
+      toast({
+        title: "Profile updated!",
+        description: "Your profile information has been saved successfully.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to update profile. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -77,11 +114,11 @@ const Profile = () => {
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
                         <p className="font-medium">Products</p>
-                        <p className="text-blue-600">12</p>
+                        <p className="text-blue-600">{myListings.length}</p>
                       </div>
                       <div>
-                        <p className="font-medium">Sales</p>
-                        <p className="text-blue-600">48</p>
+                        <p className="font-medium">Orders</p>
+                        <p className="text-blue-600">{orders.length}</p>
                       </div>
                     </div>
                   </div>
@@ -181,9 +218,10 @@ const Profile = () => {
                       type="submit"
                       className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
                       size="lg"
+                      disabled={isLoading}
                     >
                       <Save className="mr-2" size={20} />
-                      Save Changes
+                      {isLoading ? 'Saving...' : 'Save Changes'}
                     </Button>
                   </form>
                 </CardContent>

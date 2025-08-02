@@ -21,7 +21,8 @@ import {
   Heart,
   Settings,
   Menu,
-  X
+  X,
+  Shield
 } from 'lucide-react';
 
 export function AppSidebar() {
@@ -52,6 +53,10 @@ export function AppSidebar() {
   const accountItems = [
     { title: 'Profile', icon: User, href: '/profile' },
   ];
+
+  const adminItems = user?.role === 'admin' ? [
+    { title: 'Admin Dashboard', icon: Shield, href: '/admin' },
+  ] : [];
 
   const handleLinkClick = () => {
     // Close sidebar on mobile when link is clicked
@@ -191,6 +196,32 @@ export function AppSidebar() {
               ))}
             </nav>
           </div>
+
+          {/* Admin Section */}
+          {adminItems.length > 0 && (
+            <div>
+              <h3 className="text-sm font-semibold text-gray-600 mb-3">Admin</h3>
+              <nav className="space-y-1">
+                {adminItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    onClick={handleLinkClick}
+                    className={`
+                      flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                      ${location.pathname === item.href 
+                        ? 'bg-purple-100 text-purple-700' 
+                        : 'text-gray-700 hover:bg-purple-50'
+                      }
+                    `}
+                  >
+                    <item.icon className="h-4 w-4" />
+                    <span>{item.title}</span>
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          )}
         </div>
 
         {/* Footer */}

@@ -53,6 +53,17 @@ Rails.application.routes.draw do
       
       # Legacy posts routes (keeping for compatibility)
       resources :posts, only: [:index, :create, :show, :update, :destroy]
+      
+      # Admin routes
+      namespace :admin do
+        get 'dashboard', to: 'admin#dashboard'
+        get 'users', to: 'admin#users'
+        patch 'users/:id/toggle_admin', to: 'admin#toggle_admin'
+        delete 'users/:id', to: 'admin#delete_user'
+        get 'products', to: 'admin#products'
+        delete 'products/:id', to: 'admin#delete_product'
+        get 'orders', to: 'admin#orders'
+      end
     end
   end
 end 

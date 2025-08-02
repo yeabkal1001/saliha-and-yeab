@@ -20,7 +20,6 @@ const SignUp = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isSeller, setIsSeller] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
@@ -55,7 +54,7 @@ const SignUp = () => {
         formData.name,
         formData.email,
         formData.password,
-        isSeller ? formData.storeName : undefined
+        formData.storeName
       );
       
       if (success) {
@@ -187,36 +186,25 @@ const SignUp = () => {
                 </div>
               </div>
               
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="isSeller"
-                  checked={isSeller}
-                  onCheckedChange={(checked) => setIsSeller(checked as boolean)}
-                  disabled={isLoading}
-                />
-                <Label htmlFor="isSeller" className="text-sm">
-                  I want to sell products
-                </Label>
-              </div>
-              
-              {isSeller && (
-                <div className="space-y-2">
-                  <Label htmlFor="storeName">Store Name</Label>
-                  <div className="relative">
-                    <Store className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                    <Input
-                      id="storeName"
-                      type="text"
-                      placeholder="Enter your store name"
-                      value={formData.storeName}
-                      onChange={(e) => handleChange('storeName', e.target.value)}
-                      className="pl-10"
-                      required={isSeller}
-                      disabled={isLoading}
-                    />
-                  </div>
+              <div className="space-y-2">
+                <Label htmlFor="storeName">Store Name *</Label>
+                <div className="relative">
+                  <Store className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                  <Input
+                    id="storeName"
+                    type="text"
+                    placeholder="Enter your store name"
+                    value={formData.storeName}
+                    onChange={(e) => handleChange('storeName', e.target.value)}
+                    className="pl-10"
+                    required
+                    disabled={isLoading}
+                  />
                 </div>
-              )}
+                <p className="text-xs text-gray-500">
+                  Everyone can sell products on ShopEase
+                </p>
+              </div>
               
               <Button
                 type="submit"

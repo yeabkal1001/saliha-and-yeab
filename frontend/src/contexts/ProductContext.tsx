@@ -244,12 +244,10 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
     try {
       const orderData = {
-        items: cart.map(item => ({
+        order_items: cart.map(item => ({
           product_id: item.product.id,
-          quantity: item.quantity,
-          price: item.product.price
+          quantity: item.quantity
         })),
-        total: getCartTotal(),
         shipping_address: shippingAddress
       };
 
