@@ -334,12 +334,12 @@ const SellerDashboard = () => {
                         <span className="font-medium">Order {order.id}</span>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-600">{order.userName}</p>
-                        <p className="text-xs text-gray-500">{order.createdAt.toLocaleDateString()}</p>
+                                                 <p className="text-sm text-gray-600">{order.user?.name || 'Unknown'}</p>
+                         <p className="text-xs text-gray-500">{new Date(order.created_at).toLocaleDateString()}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold">${order.total.toFixed(2)}</p>
+                                             <p className="font-bold">${order.total_amount.toFixed(2)}</p>
                       <Badge 
                         variant={order.status === 'delivered' ? 'default' : 'secondary'}
                         className={

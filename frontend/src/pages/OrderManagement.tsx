@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { useOrders, Order } from '../contexts/OrderContext';
+import { useOrders, Order, OrderUpdate } from '../contexts/OrderContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../hooks/use-toast';
 import { 
@@ -93,7 +93,7 @@ const OrderManagement = () => {
       return;
     }
 
-    const updateData: any = {
+    const updateData: OrderUpdate = {
       orderId: parseInt(orderId),
       status: updateForm.status as 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled',
     };
@@ -120,9 +120,9 @@ const OrderManagement = () => {
     setUpdateForm({
       status: order.status,
       notes: order.notes || '',
-      trackingNumber: order.trackingNumber || '',
-      estimatedDelivery: order.estimatedDelivery 
-        ? new Date(order.estimatedDelivery).toISOString().split('T')[0] 
+            trackingNumber: order.tracking_number || '',
+      estimatedDelivery: order.estimated_delivery
+        ? new Date(order.estimated_delivery).toISOString().split('T')[0]
         : ''
     });
   };
