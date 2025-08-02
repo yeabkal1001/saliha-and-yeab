@@ -6,10 +6,11 @@ class ApplicationController < ActionController::API
   
   def authenticate_user
     header = request.headers['Authorization']
-    return nil unless header
+    @current_user = nil
+    return @current_user unless header
     
     token = header.split(' ').last
-    return nil unless token
+    return @current_user unless token
     
     begin
       decoded = JWT.decode(token, 'your-secret-key-here')[0]
@@ -19,6 +20,8 @@ class ApplicationController < ActionController::API
     rescue JWT::DecodeError => e
       @current_user = nil
     end
+    
+    @current_user
   end
   
   def current_user
