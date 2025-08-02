@@ -309,7 +309,7 @@ const AdminDashboard = () => {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm font-medium text-gray-600">Total Revenue</p>
-                      <p className="text-2xl font-bold">${stats.total_revenue.toFixed(2)}</p>
+                      <p className="text-2xl font-bold">${typeof stats.total_revenue === 'string' ? parseFloat(stats.total_revenue).toFixed(2) : stats.total_revenue.toFixed(2)}</p>
                     </div>
                     <DollarSign className="h-8 w-8 text-purple-600" />
                   </div>
@@ -429,7 +429,7 @@ const AdminDashboard = () => {
                           <p className="text-sm text-gray-600">by {order.user.name}</p>
                         </div>
                         <div className="text-right">
-                          <p className="font-bold">${order.total_amount}</p>
+                          <p className="font-bold">${typeof order.total_amount === 'string' ? parseFloat(order.total_amount).toFixed(2) : order.total_amount.toFixed(2)}</p>
                           <Badge variant={order.status === 'delivered' ? 'default' : 'secondary'}>
                             {order.status}
                           </Badge>
@@ -439,7 +439,7 @@ const AdminDashboard = () => {
                         {order.order_items.map((item, index) => (
                           <div key={index} className="flex justify-between">
                             <span>{item.product.title} x{item.quantity}</span>
-                            <span>${(item.product.price * item.quantity).toFixed(2)}</span>
+                            <span>${((typeof item.product.price === 'string' ? parseFloat(item.product.price) : item.product.price) * item.quantity).toFixed(2)}</span>
                           </div>
                         ))}
                       </div>
