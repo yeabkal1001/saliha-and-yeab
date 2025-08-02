@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { productsAPI, ordersAPI } from '../lib/api';
 import { useNotifications } from './NotificationContext';
 import { useAuth } from './AuthContext';
-import { productsAPI, ordersAPI } from '@/lib/api';
 
 export interface Product {
   id: string;
@@ -63,52 +63,56 @@ interface ProductContextType {
 const ProductContext = createContext<ProductContextType | null>(null);
 
 export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { addNotification } = useNotifications();
-  const { user } = useAuth();
-
   const [products, setProducts] = useState<Product[]>([]);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  const myListings = products.filter(p => p.user_id === user?.id);
+  
+  const { addNotification } = useNotifications();
+  const { user } = useAuth();
 
   // Fetch products from API
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      setError(null);
       const response = await productsAPI.getAll();
       setProducts(response.data);
+      setError(null);
     } catch (err) {
       console.error('Failed to fetch products:', err);
-      setError('Failed to load products. Please try again.');
-      addNotification({
-        type: 'message',
-        title: 'Error',
-        message: 'Failed to load products. Please try again.'
-      });
+      setError('Failed to load products');
     } finally {
       setLoading(false);
     }
   };
 
-  // Fetch orders from API
+  // Fetch orders from API - only when user is authenticated
   const fetchOrders = async () => {
+    if (!user) return; // Don't fetch orders if user is not authenticated
+    
     try {
       const response = await ordersAPI.getAll();
       setOrders(response.data);
     } catch (err) {
       console.error('Failed to fetch orders:', err);
+      // Don't set error for orders since it's not critical
     }
   };
 
   // Load products and orders on mount
   useEffect(() => {
     fetchProducts();
-    fetchOrders();
   }, []);
+
+  // Fetch orders when user changes
+  useEffect(() => {
+    if (user) {
+      fetchOrders();
+    } else {
+      setOrders([]); // Clear orders when user logs out
+    }
+  }, [user]);
 
   const refreshProducts = () => {
     fetchProducts();
@@ -199,7 +203,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const removeFromCart = (productId: string) => {
-    setCart(prevCart => prevCart.filter(item => item.product.id !== productId));
+    setCart(prev => prev.filter(item => item.product.id !== productId));
   };
 
   const updateCartQuantity = (productId: string, quantity: number) => {
@@ -207,11 +211,12 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       removeFromCart(productId);
       return;
     }
-    setCart(prevCart =>
-      prevCart.map(item =>
-        item.product.id === productId ? { ...item, quantity } : item
-      )
-    );
+    
+    setCart(prev => prev.map(item =>
+      item.product.id === productId
+        ? { ...item, quantity }
+        : item
+    ));
   };
 
   const clearCart = () => {
@@ -219,79 +224,61 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const placeOrder = async (shippingAddress: string) => {
-    if (cart.length === 0 || !user) return;
+    if (!user) {
+      addNotification({
+        type: 'message',
+        title: 'Error',
+        message: 'You must be logged in to place an order.'
+      });
+      return;
+    }
+
+    if (cart.length === 0) {
+      addNotification({
+        type: 'message',
+        title: 'Error',
+        message: 'Your cart is empty.'
+      });
+      return;
+    }
 
     try {
-      // Prepare order data for backend
-      const orderItems = cart.map(item => ({
-        product_id: parseInt(item.product.id),
-        quantity: item.quantity
-      }));
-
       const orderData = {
-        shipping_address: shippingAddress,
-        billing_address: shippingAddress, // Use shipping address as billing address
-        order_items: orderItems
+        items: cart.map(item => ({
+          product_id: item.product.id,
+          quantity: item.quantity,
+          price: item.product.price
+        })),
+        total: getCartTotal(),
+        shipping_address: shippingAddress
       };
 
-      // Create order in backend
       const response = await ordersAPI.create(orderData);
       const newOrder = response.data;
-
-      // Add to local orders state
+      
       setOrders(prev => [newOrder, ...prev]);
-
-      // Notify sellers about new orders
-      const sellerNotifications = new Map<string, CartItem[]>();
-      cart.forEach(item => {
-        const sellerId = item.product.user_id;
-        if (!sellerNotifications.has(sellerId)) {
-          sellerNotifications.set(sellerId, []);
-        }
-        sellerNotifications.get(sellerId)!.push(item);
-      });
-
-      sellerNotifications.forEach((items, sellerId) => {
-        if (sellerId === user.id) { // Only notify if current user is the seller
-          items.forEach(item => {
-            addNotification({
-              type: 'order',
-              title: 'New Order Received!',
-              message: `Someone just ordered your ${item.product.title} (Qty: ${item.quantity})`,
-              orderId: newOrder.id
-            });
-          });
-        }
-      });
-
-      // Update stock in local state
-      setProducts(prev =>
-        prev.map(product => {
-          const cartItem = cart.find(item => item.product.id === product.id);
-          if (cartItem) {
-            return { ...product, stock_quantity: product.stock_quantity - cartItem.quantity };
-          }
-          return product;
-        })
-      );
-
       clearCart();
-              addNotification({
-          type: 'message',
-          title: 'Order Placed!',
-          message: 'Your order has been placed successfully!'
-        });
+      
+      addNotification({
+        type: 'message',
+        title: 'Order Placed!',
+        message: 'Your order has been placed successfully.'
+      });
     } catch (err) {
       console.error('Failed to place order:', err);
-              addNotification({
-          type: 'message',
-          title: 'Order Failed',
-          message: 'Failed to place order. Please try again.'
-        });
+      addNotification({
+        type: 'message',
+        title: 'Error',
+        message: 'Failed to place order. Please try again.'
+      });
     }
   };
 
-    const getSellerOrders = (sellerId: string): Order[] => {
+  // Get products listed by the current user
+  const myListings = products.filter(product => product.user_id === user?.id);
+
+  // Get orders for a specific seller
+  const getSellerOrders = (sellerId: string): Order[] => {
     return orders.filter(order => 
       order.items.some(item => item.product.user_id === sellerId)
     );
@@ -301,26 +288,28 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
   };
 
+  const value: ProductContextType = {
+    products,
+    cart,
+    orders,
+    myListings,
+    loading,
+    error,
+    addProduct,
+    updateProduct,
+    deleteProduct,
+    addToCart,
+    removeFromCart,
+    updateCartQuantity,
+    clearCart,
+    placeOrder,
+    getSellerOrders,
+    refreshProducts,
+    getCartTotal
+  };
+
   return (
-    <ProductContext.Provider value={{
-      products,
-      cart,
-      orders,
-      myListings,
-      loading,
-      error,
-      addProduct,
-      updateProduct,
-      deleteProduct,
-      addToCart,
-      removeFromCart,
-      updateCartQuantity,
-      clearCart,
-      placeOrder,
-              getSellerOrders,
-        refreshProducts,
-        getCartTotal
-    }}>
+    <ProductContext.Provider value={value}>
       {children}
     </ProductContext.Provider>
   );
@@ -329,7 +318,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
 export const useProducts = () => {
   const context = useContext(ProductContext);
   if (!context) {
-    throw new Error('useProducts must be used within ProductProvider');
+    throw new Error('useProducts must be used within a ProductProvider');
   }
   return context;
 };

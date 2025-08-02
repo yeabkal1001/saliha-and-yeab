@@ -12755,3 +12755,140 @@ Processing by Api::V1::AuthController#signin as */*
 Completed 200 OK in 192ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 533)
 
 
+Started GET "/api/v1/orders" for 172.18.0.1 at 2025-08-02 07:27:01 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/products" for 172.18.0.1 at 2025-08-02 07:27:01 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 2, 3, 4, 5)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 52)
+
+
+  [1m[36mReview Load (1.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (1, 2, 3, 4, 5, 6)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 2 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 3 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 4 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 5 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 6 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 22ms (Views: 0.3ms | ActiveRecord: 4.5ms | Allocations: 8340)
+
+
+Started POST "/api/v1/auth/signup" for 172.18.0.1 at 2025-08-02 07:27:22 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthController#signup as HTML
+  Parameters: {"name"=>"yeabsira", "email"=>"yeabsira1@gmail.com", "password"=>"12345678", "auth"=>{"name"=>"yeabsira", "email"=>"yeabsira1@gmail.com", "password"=>"12345678"}}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 431)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/api/v1/auth_controller.rb:66:in `user_params'
+app/controllers/api/v1/auth_controller.rb:6:in `signup'
+Started GET "/api/v1/orders" for 172.18.0.1 at 2025-08-02 07:27:59 +0000
+Started GET "/api/v1/products" for 172.18.0.1 at 2025-08-02 07:27:59 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 52)
+
+
+  [1m[36mProduct Load (1.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 2, 3, 4, 5)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (1, 2, 3, 4, 5, 6)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 2 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 3 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 4 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 5 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 6 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 22ms (Views: 0.5ms | ActiveRecord: 4.6ms | Allocations: 7992)
+
+
+Started GET "/api/v1/products" for 172.18.0.1 at 2025-08-02 07:28:30 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 2, 3, 4, 5)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (1, 2, 3, 4, 5, 6)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 2 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 3 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 4 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 5 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 6 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 7389)
+
+
+Started POST "/api/v1/auth/signup" for 172.18.0.1 at 2025-08-02 07:28:34 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthController#signup as */*
+  Parameters: {"user"=>{"name"=>"Test User", "email"=>"test@example.com", "password"=>"password123"}, "auth"=>{"user"=>{"name"=>"Test User", "email"=>"test@example.com", "password"=>"password123"}}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'test@example.com' LIMIT 1[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+Completed 422 Unprocessable Entity in 201ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 3627)
+
+
+Started POST "/api/v1/auth/signup" for 172.18.0.1 at 2025-08-02 07:28:39 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthController#signup as */*
+  Parameters: {"user"=>{"name"=>"Test User", "email"=>"test@example.com", "password"=>"password123"}, "auth"=>{"user"=>{"name"=>"Test User", "email"=>"test@example.com", "password"=>"password123"}}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'test@example.com' LIMIT 1[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+Completed 422 Unprocessable Entity in 201ms (Views: 0.1ms | ActiveRecord: 0.6ms | Allocations: 2703)
+
+
+Started POST "/api/v1/auth/signup" for 172.18.0.1 at 2025-08-02 07:28:58 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthController#signup as */*
+  Parameters: {"user"=>{"name"=>"Test User", "email"=>"test@example.com", "password"=>"password123"}, "auth"=>{"user"=>{"name"=>"Test User", "email"=>"test@example.com", "password"=>"password123"}}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'test@example.com' LIMIT 1[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`, `store_name`) VALUES ('Test User', 'test@example.com', '$2a$12$Fme/oi8iHoREXZ540EprlelzEN/pNg1x4GhxyWYAEcHDKNKDmdkv6', '2025-08-02 07:28:58.890867', '2025-08-02 07:28:58.890867', NULL)[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+  [1m[36mTRANSACTION (10.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `signup'
+Completed 201 Created in 220ms (Views: 0.1ms | ActiveRecord: 15.4ms | Allocations: 9028)
+
+

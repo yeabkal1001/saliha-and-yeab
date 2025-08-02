@@ -82,7 +82,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         id: userData.id,
         name: userData.name,
         email: userData.email,
-        role: userData.role,
+        role: userData.role || 'user',
         store_name: userData.store_name
       });
       
@@ -99,14 +99,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = async (name: string, email: string, password: string, store_name?: string): Promise<boolean> => {
     try {
       setLoading(true);
-      const response = await api.post('/api/v1/auth/signup', { 
-        name, 
-        email, 
-        password, 
-        store_name 
-      });
+      // Wrap data in 'user' object as expected by backend
+      const userData = {
+        user: {
+          name, 
+          email, 
+          password, 
+          store_name 
+        }
+      };
       
-      const { token, user: userData } = response.data;
+      const response = await api.post('/api/v1/auth/signup', userData);
+      
+      const { token, user: userDataResponse } = response.data;
       
       // Store token securely
       localStorage.setItem('authToken', token);
@@ -116,11 +121,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       // Set user data
       setUser({
-        id: userData.id,
-        name: userData.name,
-        email: userData.email,
-        role: userData.role,
-        store_name: userData.store_name
+        id: userDataResponse.id,
+        name: userDataResponse.name,
+        email: userDataResponse.email,
+        role: userDataResponse.role || 'user',
+        store_name: userDataResponse.store_name
       });
       
       return true;
