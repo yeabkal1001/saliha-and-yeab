@@ -40,46 +40,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Check for existing auth token on mount
+  // Authentication check disabled - no automatic redirects
   useEffect(() => {
-    const checkAuth = async () => {
-      console.log('🔍 Checking authentication...');
-      const token = localStorage.getItem('authToken');
-      console.log('Token exists:', !!token);
-      
-      if (token) {
-        try {
-          console.log('🔄 Fetching current user...');
-          const response = await authAPI.getCurrentUser();
-          const userData = response.data.user;
-          console.log('✅ User data received:', userData);
-          
-          // Convert backend snake_case to frontend camelCase
-          const convertedUser = {
-            ...userData,
-            storeName: userData.store_name,
-            id: userData.id.toString()
-          };
-          console.log('✅ Setting user:', convertedUser);
-          setUser(convertedUser);
-        } catch (err) {
-          console.error('❌ Failed to get current user:', err);
-          localStorage.removeItem('authToken');
-          setUser(null);
-        }
-      } else {
-        console.log('❌ No token found, user not authenticated');
-        setUser(null);
-      }
-      
-      // Add a small delay to prevent rapid re-renders
-      setTimeout(() => {
-        console.log('🏁 Setting loading to false');
-        setLoading(false);
-      }, 100);
-    };
-
-    checkAuth();
+    console.log('🔍 AuthContext: Authentication check disabled - app is public');
+    setLoading(false);
+    setUser(null);
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {

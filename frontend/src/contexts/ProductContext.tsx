@@ -57,6 +57,7 @@ interface ProductContextType {
   placeOrder: (shippingAddress: string) => void;
   getSellerOrders: (sellerId: string) => Order[];
   refreshProducts: () => void;
+  getCartTotal: () => number;
 }
 
 const ProductContext = createContext<ProductContextType | null>(null);
@@ -113,6 +114,10 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
     fetchProducts();
   };
 
+  const getCartTotal = (): number => {
+    return cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+  };
+
   const addProduct = async (productData: Omit<Product, 'id' | 'created_at' | 'updated_at' | 'user_id'>) => {
     try {
       const response = await productsAPI.create(productData);
@@ -143,14 +148,14 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
         )
       );
       addNotification({
-        type: 'success',
+        type: 'message',
         title: 'Success',
         message: 'Product updated successfully!'
       });
     } catch (err) {
       console.error('Failed to update product:', err);
       addNotification({
-        type: 'error',
+        type: 'message',
         title: 'Error',
         message: 'Failed to update product. Please try again.'
       });
@@ -164,14 +169,14 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       // Also remove from cart if present
       setCart(prev => prev.filter(item => item.product.id !== productId));
       addNotification({
-        type: 'success',
+        type: 'message',
         title: 'Success',
         message: 'Product deleted successfully!'
       });
     } catch (err) {
       console.error('Failed to delete product:', err);
       addNotification({
-        type: 'error',
+        type: 'message',
         title: 'Error',
         message: 'Failed to delete product. Please try again.'
       });
@@ -191,7 +196,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return [...prevCart, { product, quantity }];
     });
     addNotification({
-      type: 'success',
+      type: 'message',
       title: 'Added to Cart',
       message: `${product.title} added to cart!`
     });
@@ -276,14 +281,14 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
       clearCart();
       addNotification({
-        type: 'success',
+        type: 'order',
         title: 'Order Placed!',
         message: 'Your order has been placed successfully!'
       });
     } catch (err) {
       console.error('Failed to place order:', err);
       addNotification({
-        type: 'error',
+        type: 'message',
         title: 'Order Failed',
         message: 'Failed to place order. Please try again.'
       });
@@ -313,7 +318,8 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
       clearCart,
       placeOrder,
       getSellerOrders,
-      refreshProducts
+      refreshProducts,
+      getCartTotal
     }}>
       {children}
     </ProductContext.Provider>
