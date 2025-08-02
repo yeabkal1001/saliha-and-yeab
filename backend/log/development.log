@@ -9131,3 +9131,739 @@ Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocati
 Completed 200 OK in 19ms (Views: 0.5ms | ActiveRecord: 2.9ms | Allocations: 8162)
 
 
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:54 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:54 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 3.4ms | Allocations: 8081)
+
+
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:54 +0000
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:54 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 53)
+
+
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 2.1ms | Allocations: 7379)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:55 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:55 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Processing by Api::V1::OrdersController#index as HTML
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 3.1ms | Allocations: 8635)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:55 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:55 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 8124)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:55 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:55 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 53)
+
+
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 14ms (Views: 0.4ms | ActiveRecord: 2.6ms | Allocations: 7993)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:56 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:56 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 53)
+
+
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 16ms (Views: 0.3ms | ActiveRecord: 3.1ms | Allocations: 7982)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:56 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:56 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+Processing by Api::V1::OrdersController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 53)
+
+
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 2.7ms | Allocations: 8192)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:56 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:56 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 16ms (Views: 0.3ms | ActiveRecord: 2.0ms | Allocations: 7378)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:57 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:57 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 7379)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:57 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:57 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 7379)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:57 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:57 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 7980)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:58 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:58 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+Processing by Api::V1::OrdersController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 2.2ms | Allocations: 8194)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:58 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:58 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 13ms (Views: 0.3ms | ActiveRecord: 2.4ms | Allocations: 7379)
+
+
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:58 +0000
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:58 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+Processing by Api::V1::OrdersController#index as HTML
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 15ms (Views: 0.3ms | ActiveRecord: 3.0ms | Allocations: 8086)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:59 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:59 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 53)
+
+
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 14ms (Views: 0.3ms | ActiveRecord: 2.9ms | Allocations: 7980)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:59 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:59 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 7379)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:02:59 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:02:59 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ProductsController#index as HTML
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 54)
+
+
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 2.1ms | Allocations: 7981)
+
+
+Started GET "/api/v1/orders" for 172.24.0.1 at 2025-08-02 01:03:00 +0000
+Started GET "/api/v1/products" for 172.24.0.1 at 2025-08-02 01:03:00 +0000
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.24.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::OrdersController#index as HTML
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 53)
+
+
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (6, 7, 8, 9, 10)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (7, 8, 9, 10, 11, 12)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 7 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 8 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 14ms (Views: 0.4ms | ActiveRecord: 2.4ms | Allocations: 7379)
+
+
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE `rails_app_development` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (66.5ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (54.4ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('6302314972764189855', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[36mActiveRecord::InternalMetadata Create (12.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2025-08-02 01:34:12.138310', '2025-08-02 01:34:12.138313')[0m
+Migrating to CreatePosts (20240101000000)
+  [1m[35m (59.3ms)[0m  [1m[35mCREATE TABLE `posts` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255) NOT NULL, `content` text NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (5.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240101000000')[0m
+Migrating to CreateUsers (20240101000001)
+  [1m[35m (66.5ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `email` varchar(255) NOT NULL, `password_digest` varchar(255) NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (43.3ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_users_on_email` ON `users` (`email`)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (14.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240101000001')[0m
+Migrating to CreateProducts (20240101000002)
+  [1m[35m (90.1ms)[0m  [1m[35mCREATE TABLE `products` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255) NOT NULL, `description` text NOT NULL, `price` decimal(10,2) NOT NULL, `category` varchar(255) NOT NULL, `image_url` varchar(255), `stock_quantity` int DEFAULT 0, `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_products_on_user_id` (`user_id`), CONSTRAINT `fk_rails_dee2631783`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+)[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE INDEX `index_products_on_category` ON `products` (`category`)[0m
+  [1m[35m (121.9ms)[0m  [1m[35mCREATE INDEX `index_products_on_title` ON `products` (`title`)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (26.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240101000002')[0m
+Migrating to CreateOrders (20240101000003)
+  [1m[35m (140.1ms)[0m  [1m[35mCREATE TABLE `orders` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `status` varchar(255) DEFAULT 'pending' NOT NULL, `total_amount` decimal(10,2) NOT NULL, `shipping_address` varchar(255), `billing_address` varchar(255), `user_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_orders_on_user_id` (`user_id`), CONSTRAINT `fk_rails_f868b47f6a`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+)[0m
+  [1m[35m (73.4ms)[0m  [1m[35mCREATE INDEX `index_orders_on_status` ON `orders` (`status`)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (8.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240101000003')[0m
+Migrating to CreateOrderItems (20240101000004)
+  [1m[35m (169.8ms)[0m  [1m[35mCREATE TABLE `order_items` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `quantity` int NOT NULL, `price` decimal(10,2) NOT NULL, `order_id` bigint NOT NULL, `product_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_order_items_on_order_id` (`order_id`), INDEX `index_order_items_on_product_id` (`product_id`), CONSTRAINT `fk_rails_e3cb28f071`
+FOREIGN KEY (`order_id`)
+  REFERENCES `orders` (`id`)
+, CONSTRAINT `fk_rails_f1a29ddd47`
+FOREIGN KEY (`product_id`)
+  REFERENCES `products` (`id`)
+)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (17.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240101000004')[0m
+Migrating to CreateReviews (20240101000005)
+  [1m[35m (117.8ms)[0m  [1m[35mCREATE TABLE `reviews` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `rating` int NOT NULL, `comment` text NOT NULL, `user_id` bigint NOT NULL, `product_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_reviews_on_user_id` (`user_id`), INDEX `index_reviews_on_product_id` (`product_id`), CONSTRAINT `fk_rails_74a66bd6c5`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+, CONSTRAINT `fk_rails_bedd9094d4`
+FOREIGN KEY (`product_id`)
+  REFERENCES `products` (`id`)
+)[0m
+  [1m[35m (45.0ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_reviews_on_user_id_and_product_id` ON `reviews` (`user_id`, `product_id`)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (4.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240101000005')[0m
+Migrating to CreateWishlistItems (20240101000006)
+  [1m[35m (113.7ms)[0m  [1m[35mCREATE TABLE `wishlist_items` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint NOT NULL, `product_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_wishlist_items_on_user_id` (`user_id`), INDEX `index_wishlist_items_on_product_id` (`product_id`), CONSTRAINT `fk_rails_5c10acf6bc`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+, CONSTRAINT `fk_rails_d31985edcf`
+FOREIGN KEY (`product_id`)
+  REFERENCES `products` (`id`)
+)[0m
+  [1m[35m (50.8ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_wishlist_items_on_user_id_and_product_id` ON `wishlist_items` (`user_id`, `product_id`)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (4.8ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240101000006')[0m
+Migrating to CreateActiveStorageTables (20240101000007)
+  [1m[35m (74.5ms)[0m  [1m[35mCREATE TABLE `active_storage_blobs` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `key` varchar(255) NOT NULL, `filename` varchar(255) NOT NULL, `content_type` varchar(255), `metadata` text, `service_name` varchar(255) NOT NULL, `byte_size` bigint NOT NULL, `checksum` varchar(255) NOT NULL, `created_at` datetime(6) NOT NULL, UNIQUE INDEX `index_active_storage_blobs_on_key` (`key`))[0m
+  [1m[35m (96.2ms)[0m  [1m[35mCREATE TABLE `active_storage_attachments` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255) NOT NULL, `record_type` varchar(255) NOT NULL, `record_id` bigint NOT NULL, `blob_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, INDEX `index_active_storage_attachments_on_blob_id` (`blob_id`), UNIQUE INDEX `index_active_storage_attachments_uniqueness` (`record_type`, `record_id`, `name`, `blob_id`), CONSTRAINT `fk_rails_c3b3935057`
+FOREIGN KEY (`blob_id`)
+  REFERENCES `active_storage_blobs` (`id`)
+)[0m
+  [1m[35m (76.4ms)[0m  [1m[35mCREATE TABLE `active_storage_variant_records` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `blob_id` bigint NOT NULL, `variation_digest` varchar(255) NOT NULL, UNIQUE INDEX `index_active_storage_variant_records_uniqueness` (`blob_id`, `variation_digest`), CONSTRAINT `fk_rails_993965df05`
+FOREIGN KEY (`blob_id`)
+  REFERENCES `active_storage_blobs` (`id`)
+)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (4.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240101000007')[0m
+Migrating to AddStoreNameToUsers (20250801184712)
+  [1m[35m (176.7ms)[0m  [1m[35mALTER TABLE `users` ADD `store_name` varchar(255)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (15.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20250801184712')[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('6302314972764189855')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE DATABASE `rails_app_development` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('6302314972764189855', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT RELEASE_LOCK('6302314972764189855')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  [1m[36mOrder Load (0.4ms)[0m  [1m[34mSELECT `orders`.* FROM `orders`[0m
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews`[0m
+  [1m[36mWishlistItem Load (0.5ms)[0m  [1m[34mSELECT `wishlist_items`.* FROM `wishlist_items`[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'admin@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`, `store_name`) VALUES ('Admin User', 'admin@example.com', '$2a$12$MtCIWozdEmNrkzcv1j3NVe0z70Hk3yBnDtdkTEz0YVGS60qd1fq.2', '2025-08-02 01:34:37.864406', '2025-08-02 01:34:37.864406', 'Admin Store')[0m
+  [1m[36mTRANSACTION (14.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'john.doe@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`, `store_name`) VALUES ('John Doe', 'john.doe@example.com', '$2a$12$FI1RKsX1Lj1AyTNDZoPHfOeyljwzWM4CeqW02k.e2jYd9ZbAjNT4e', '2025-08-02 01:34:38.114293', '2025-08-02 01:34:38.114293', 'John\'s Store')[0m
+  [1m[36mTRANSACTION (11.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'sarah@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`, `store_name`) VALUES ('Sarah Johnson', 'sarah@example.com', '$2a$12$8xZ5exxFY9axMDz6NXYRd.sQplSVyN5u3CPNBbtyRmpfpCUc5IPD.', '2025-08-02 01:34:38.328918', '2025-08-02 01:34:38.328918', 'Sarah\'s Store')[0m
+  [1m[36mTRANSACTION (16.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'mike@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`, `store_name`) VALUES ('Mike Chen', 'mike@example.com', '$2a$12$4aUOwV1mTt5dBQ.M2vXSMuNQz1H8FPGyZEHh9eQI49swY1VNOzbVO', '2025-08-02 01:34:38.548320', '2025-08-02 01:34:38.548320', 'Mike\'s Store')[0m
+  [1m[36mTRANSACTION (18.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `users` WHERE `users`.`email` = 'emma@example.com' LIMIT 1[0m
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`name`, `email`, `password_digest`, `created_at`, `updated_at`, `store_name`) VALUES ('Emma Wilson', 'emma@example.com', '$2a$12$XdtSfL7RS4xyTSgD4TcSie2qgPspzJPod973sgQdLXosDHzDRmMjW', '2025-08-02 01:34:38.768084', '2025-08-02 01:34:38.768084', 'Emma\'s Store')[0m
+  [1m[36mTRANSACTION (19.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.7ms)[0m  [1m[32mINSERT INTO `products` (`title`, `description`, `price`, `category`, `image_url`, `stock_quantity`, `user_id`, `created_at`, `updated_at`) VALUES ('Wireless Bluetooth Headphones', 'Premium quality wireless headphones with noise cancellation and 30-hour battery life. Perfect for music lovers and professionals who need crystal clear audio.', 199.99, 'Electronics', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400', 15, 1, '2025-08-02 01:34:38.806027', '2025-08-02 01:34:38.806027')[0m
+  [1m[36mTRANSACTION (20.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (2.0ms)[0m  [1m[32mINSERT INTO `products` (`title`, `description`, `price`, `category`, `image_url`, `stock_quantity`, `user_id`, `created_at`, `updated_at`) VALUES ('Organic Cotton T-Shirt', 'Comfortable and sustainable organic cotton t-shirt available in multiple colors. Made from 100% organic cotton, perfect for everyday wear.', 29.99, 'Clothing', 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400', 50, 2, '2025-08-02 01:34:38.831339', '2025-08-02 01:34:38.831339')[0m
+  [1m[36mTRANSACTION (26.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.7ms)[0m  [1m[32mINSERT INTO `products` (`title`, `description`, `price`, `category`, `image_url`, `stock_quantity`, `user_id`, `created_at`, `updated_at`) VALUES ('Smart Fitness Watch', 'Advanced fitness tracking with heart rate monitor, GPS, and smartphone integration. Track your workouts, sleep, and daily activity with precision.', 299.99, 'Electronics', 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400', 8, 3, '2025-08-02 01:34:38.862870', '2025-08-02 01:34:38.862870')[0m
+  [1m[36mTRANSACTION (9.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.6ms)[0m  [1m[32mINSERT INTO `products` (`title`, `description`, `price`, `category`, `image_url`, `stock_quantity`, `user_id`, `created_at`, `updated_at`) VALUES ('Artisan Coffee Beans', 'Premium single-origin coffee beans, freshly roasted with rich flavor notes. Perfect for coffee enthusiasts who appreciate quality and taste.', 24.99, 'Food & Beverages', 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400', 100, 4, '2025-08-02 01:34:38.876265', '2025-08-02 01:34:38.876265')[0m
+  [1m[36mTRANSACTION (30.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.3ms)[0m  [1m[32mINSERT INTO `products` (`title`, `description`, `price`, `category`, `image_url`, `stock_quantity`, `user_id`, `created_at`, `updated_at`) VALUES ('Leather Laptop Bag', 'Handcrafted genuine leather laptop bag with multiple compartments and adjustable strap. Perfect for professionals who need style and functionality.', 149.99, 'Accessories', 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400', 12, 5, '2025-08-02 01:34:38.911319', '2025-08-02 01:34:38.911319')[0m
+  [1m[36mTRANSACTION (13.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.2ms)[0m  [1m[32mINSERT INTO `products` (`title`, `description`, `price`, `category`, `image_url`, `stock_quantity`, `user_id`, `created_at`, `updated_at`) VALUES ('Indoor Plant Collection', 'Set of 3 low-maintenance indoor plants perfect for home or office decoration. Includes care instructions and decorative pots.', 79.99, 'Home & Garden', 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400', 25, 1, '2025-08-02 01:34:38.929315', '2025-08-02 01:34:38.929315')[0m
+  [1m[36mTRANSACTION (32.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mReview Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `reviews` WHERE `reviews`.`user_id` = 2 AND `reviews`.`product_id` = 1 LIMIT 1[0m
+  [1m[36mReview Create (0.4ms)[0m  [1m[32mINSERT INTO `reviews` (`rating`, `comment`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES (5, 'These headphones exceeded my expectations. The noise cancellation is fantastic and the battery life is exactly as advertised. Highly recommend!', 2, 1, '2025-08-02 01:34:38.980759', '2025-08-02 01:34:38.980759')[0m
+  [1m[36mProduct Update (0.4ms)[0m  [1m[33mUPDATE `products` SET `products`.`updated_at` = '2025-08-02 01:34:38.984569' WHERE `products`.`id` = 1[0m
+  ↳ app/models/review.rb:15:in `update_product_rating'
+  [1m[36mTRANSACTION (22.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mReview Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `reviews` WHERE `reviews`.`user_id` = 3 AND `reviews`.`product_id` = 1 LIMIT 1[0m
+  [1m[36mReview Create (0.3ms)[0m  [1m[32mINSERT INTO `reviews` (`rating`, `comment`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES (4, 'Good headphones overall. The build quality is solid and they\'re comfortable for long listening sessions. Only minor complaint is the case could be more compact.', 3, 1, '2025-08-02 01:34:39.013961', '2025-08-02 01:34:39.013961')[0m
+  [1m[36mProduct Update (0.4ms)[0m  [1m[33mUPDATE `products` SET `products`.`updated_at` = '2025-08-02 01:34:39.015921' WHERE `products`.`id` = 1[0m
+  ↳ app/models/review.rb:15:in `update_product_rating'
+  [1m[36mTRANSACTION (24.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mReview Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `reviews` WHERE `reviews`.`user_id` = 4 AND `reviews`.`product_id` = 2 LIMIT 1[0m
+  [1m[36mReview Create (0.3ms)[0m  [1m[32mINSERT INTO `reviews` (`rating`, `comment`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES (5, 'Love this organic cotton t-shirt! It\'s so soft and comfortable. The fit is perfect and it hasn\'t shrunk after multiple washes. Will definitely buy more colors.', 4, 2, '2025-08-02 01:34:39.044859', '2025-08-02 01:34:39.044859')[0m
+  [1m[36mProduct Update (0.4ms)[0m  [1m[33mUPDATE `products` SET `products`.`updated_at` = '2025-08-02 01:34:39.046547' WHERE `products`.`id` = 2[0m
+  ↳ app/models/review.rb:15:in `update_product_rating'
+  [1m[36mTRANSACTION (17.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mReview Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `reviews` WHERE `reviews`.`user_id` = 5 AND `reviews`.`product_id` = 3 LIMIT 1[0m
+  [1m[36mReview Create (0.3ms)[0m  [1m[32mINSERT INTO `reviews` (`rating`, `comment`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES (4, 'Great fitness watch with accurate tracking. The GPS works well and the battery lasts a long time. App integration is seamless.', 5, 3, '2025-08-02 01:34:39.068931', '2025-08-02 01:34:39.068931')[0m
+  [1m[36mProduct Update (0.3ms)[0m  [1m[33mUPDATE `products` SET `products`.`updated_at` = '2025-08-02 01:34:39.070254' WHERE `products`.`id` = 3[0m
+  ↳ app/models/review.rb:15:in `update_product_rating'
+  [1m[36mTRANSACTION (32.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mReview Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `reviews` WHERE `reviews`.`user_id` = 1 AND `reviews`.`product_id` = 4 LIMIT 1[0m
+  [1m[36mReview Create (0.3ms)[0m  [1m[32mINSERT INTO `reviews` (`rating`, `comment`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES (5, 'Amazing coffee! The flavor is rich and complex. Perfect for my morning routine. Will definitely order again.', 1, 4, '2025-08-02 01:34:39.107806', '2025-08-02 01:34:39.107806')[0m
+  [1m[36mProduct Update (0.3ms)[0m  [1m[33mUPDATE `products` SET `products`.`updated_at` = '2025-08-02 01:34:39.110148' WHERE `products`.`id` = 4[0m
+  ↳ app/models/review.rb:15:in `update_product_rating'
+  [1m[36mTRANSACTION (9.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Create (1.5ms)[0m  [1m[32mINSERT INTO `orders` (`status`, `total_amount`, `shipping_address`, `billing_address`, `user_id`, `created_at`, `updated_at`) VALUES ('paid', 199.99, '123 Main St, City, State 12345', '123 Main St, City, State 12345', 2, '2025-08-02 01:34:39.131130', '2025-08-02 01:34:39.131130')[0m
+  [1m[36mTRANSACTION (13.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Create (1.3ms)[0m  [1m[32mINSERT INTO `orders` (`status`, `total_amount`, `shipping_address`, `billing_address`, `user_id`, `created_at`, `updated_at`) VALUES ('pending', 59.98, '456 Oak Ave, Town, State 67890', '456 Oak Ave, Town, State 67890', 3, '2025-08-02 01:34:39.148313', '2025-08-02 01:34:39.148313')[0m
+  [1m[36mTRANSACTION (9.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrderItem Create (1.3ms)[0m  [1m[32mINSERT INTO `order_items` (`quantity`, `price`, `order_id`, `product_id`, `created_at`, `updated_at`) VALUES (1, 199.99, 1, 1, '2025-08-02 01:34:39.173237', '2025-08-02 01:34:39.173237')[0m
+  [1m[36mTRANSACTION (6.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrderItem Create (4.2ms)[0m  [1m[32mINSERT INTO `order_items` (`quantity`, `price`, `order_id`, `product_id`, `created_at`, `updated_at`) VALUES (2, 29.99, 2, 2, '2025-08-02 01:34:39.183133', '2025-08-02 01:34:39.183133')[0m
+  [1m[36mTRANSACTION (10.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `users`[0m
+  [1m[36mProduct Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `products`[0m
+  [1m[36mReview Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `reviews`[0m
+  [1m[36mOrder Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `orders`[0m
+  [1m[36mOrderItem Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `order_items`[0m
+Started GET "/api/v1/products" for 172.18.0.1 at 2025-08-02 01:34:46 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Api::V1::ProductsController#index as */*
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` IN (1, 2, 3, 4, 5)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT `reviews`.* FROM `reviews` WHERE `reviews`.`product_id` IN (1, 2, 3, 4, 5, 6)[0m
+  ↳ app/controllers/api/v1/products_controller.rb:8:in `index'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 1 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 2 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 3 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 4 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 5 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 6 AND `active_storage_attachments`.`record_type` = 'Product' AND `active_storage_attachments`.`name` = 'image' LIMIT 1[0m
+  ↳ app/models/product.rb:26:in `image_url'
+Completed 200 OK in 95ms (Views: 0.3ms | ActiveRecord: 12.8ms | Allocations: 51952)
+
+
